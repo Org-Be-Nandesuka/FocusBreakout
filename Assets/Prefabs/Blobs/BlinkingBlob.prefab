@@ -206,20 +206,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a5944ddb6a8d2408cb05734d639469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
-  _speed: 10
+  _maxHealth: 0
+  _speed: 2
   _audioArray:
   - _name: Wilhelm
     _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.05
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 20
-    _rolloff: 1
+    _loop: 0
   - _name: Hit
     _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
+    _audioMixerGroup: {fileID: 0}
     _volume: 0.5
-    _spatialBlend: 1
-    _minDistance: 0
-    _maxDistance: 20
-    _rolloff: 1
+    _loop: 0
