@@ -17,7 +17,6 @@ public class Blob : MonoBehaviour {
     private int _currentHealth;
     private ObjectPool<Blob> _blobPool;
 
-
     public Vector3 _worldDirection;
     private CharacterController _controller;
     private Coroutine _currentCoroutine;

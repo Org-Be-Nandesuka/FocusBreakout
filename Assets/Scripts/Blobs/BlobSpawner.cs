@@ -20,7 +20,7 @@ public class BlobSpawner : MonoBehaviour {
     [SerializeField] private Blob _blob;
     [SerializeField] Vector3[] _moveDirectionArray;
     [SerializeField] private int _maxBlobs;
-    [Tooltip("If the Spawn Rate is ")]
+    [Tooltip("(Blob's Lifespan) / (Spawn Rate) should be at least Max Blobs")]
     [SerializeField] private float _spawnRate;
 
     private Vector3 _upperBound;
@@ -47,10 +47,11 @@ public class BlobSpawner : MonoBehaviour {
 
     IEnumerator SpawnBlobCoroutine(float spawnRate) {
         while (true) {
+            yield return new WaitForSeconds(spawnRate);
+
             if (_blobPool.CountInactive > 0) {
                 _blobPool.Get();
             }
-            yield return new WaitForSeconds(spawnRate);
         }
     }
 

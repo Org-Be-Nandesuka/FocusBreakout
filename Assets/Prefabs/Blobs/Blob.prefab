@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1
-  _lifespan: 1
+  _lifespan: 5
   _speed: 0
   _directionChangeTime: 2
   __facingDirection: {x: 1, y: 0, z: 0}
