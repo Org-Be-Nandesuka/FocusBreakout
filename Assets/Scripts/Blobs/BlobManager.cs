@@ -5,7 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class BlobManager : MonoBehaviour {
-    [Header("Blob Prefabs")]
+/*    [Header("Blob Prefabs")]
     [SerializeField] private BlinkingBlob _blinkingBlob;
     [SerializeField] private MovingBlob _movingBlob;
 
@@ -88,7 +88,7 @@ public class BlobManager : MonoBehaviour {
 
         if (blobSpawn == null) {
             throw new ArgumentException("Exception in BlobManager's GetRandomLocationBySize()\n" +
-                "Random volume number: " + num + "\n" + 
+                "Random volume number: " + num + "\n" +
                 "Total volume: " + _totalSpawnVolume);
         } else {
             return GetRandomVector3(blobSpawn.LowerBound, blobSpawn.UpperBound);
@@ -114,11 +114,6 @@ public class BlobManager : MonoBehaviour {
 
     public static int GetBlobCount() {
         return _blobList.Count;
-    }
-
-    public static GameObject GetRandomBlob() {
-        int index = Random.Range(0, _blobList.Count);
-        return _blobList[index];
     }
 
     public static void AddBlob(GameObject blob) {
@@ -165,5 +160,11 @@ public class BlobManager : MonoBehaviour {
                 _moveDirectionArray[i].z = 1;
             }
         }
+    }*/
+
+    public static GameObject GetRandomBlob() {
+        //int index = Random.Range(0, _blobList.Count);
+        //return _blobList[index];
+        return null;
     }
 }

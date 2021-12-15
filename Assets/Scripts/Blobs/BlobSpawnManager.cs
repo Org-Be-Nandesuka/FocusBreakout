@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -8,14 +8,17 @@ using Random = UnityEngine.Random;
 // BlobSpawn's scale cannot be negative and its rotation must be (0,0,0).
 // Please keep in mind that parts of a blob may spawn outside of these bounds
 // becuase a blob's spawn point does not account for its radius. 
-public class BlobSpawner : MonoBehaviour {
+public class BlobSpawnManager : MonoBehaviour {
     [Header("Blob Prefabs")]
-    [SerializeField] private BlinkingBlob _blinkingBlob;
-    [SerializeField] private MovingBlob _movingBlob;
+    [SerializeField] private Blob _blob;
     // Each element in array has an equal chance for the blob to move in said direction
     [SerializeField] Vector3[] _moveDirectionArray;
     [SerializeField] private int _maxBlobs;
     [SerializeField] private float _spawnRate;
+
+    public int active;
+    public int inactive;
+    public int all;
 
     private float _volume;
     private Vector3 _position;
@@ -26,21 +29,33 @@ public class BlobSpawner : MonoBehaviour {
     private ObjectPool<Blob> _blobPool;
 
     void Start() {
-        CheckTranform();
+        CheckTransform();
         _position = transform.position;
         _scale = transform.localScale;
         _volume = _scale.x * _scale.y * _scale.z;
-        _blobCount = 0;
+        _blobCount = 1; // Accounts for player
         _upperBound = GetUpperBound();
         _lowerBound = GetLowerBound();
 
-        _blobPool = new ObjectPool<Blob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease, defaultCapacity: _maxBlobs, maxSize: _maxBlobs);
+        _blobPool = new ObjectPool<Blob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease, maxSize: _maxBlobs);
+        for (int i = 0; i < _maxBlobs; i++) {
+            _blobPool.Get();
+        }
+        StartCoroutine(SpawnBlobCoroutine(_spawnRate));
     }
 
     private void Update() {
-        // Spawn blobs from pool if possible
-        if (_blobCount < _maxBlobs) {
-            Blob blob = _blobPool.Get();               
+        active = _blobPool.CountActive;
+        inactive = _blobPool.CountInactive;
+        all = _blobPool.CountAll;
+    }
+
+    IEnumerator SpawnBlobCoroutine(float spawnRate) {
+        while (true) {
+            if (_blobPool.CountInactive > 0) {
+                _blobPool.Get();
+            }
+            yield return new WaitForSeconds(spawnRate);
         }
     }
 
@@ -72,40 +87,24 @@ public class BlobSpawner : MonoBehaviour {
     private Blob PoolObjectCreate() {
         Vector3 location = GetRandomVector3(_lowerBound, _upperBound);
         int num = Random.Range(0, 2);
-
-        switch (num) {
-            case 0:
-                Blob blob = Instantiate(_blinkingBlob, location, Quaternion.identity);
-                blob.BlobPool = _blobPool;
-                return blob;
-            case 1:
-                MovingBlob movingBlob = Instantiate(_movingBlob, location, Quaternion.identity);
-                int numDir = Random.Range(0, _moveDirectionArray.Length);
-                Vector3 moveDir = _moveDirectionArray[numDir];
-
-                movingBlob.WorldDirection = moveDir;
-                movingBlob.BlobPool = _blobPool;
-                return movingBlob;
-            default:
-                throw new ArgumentException("BlobSpawner Error: Random int " + num + " outside of switch statement.");
-        }
+        Blob blob = Instantiate(_blob, location, Quaternion.identity);
+        blob.BlobPool = _blobPool;
+        return blob;
     }
 
     private void PoolObjectGet(Blob blob) {
         blob.gameObject.SetActive(true);
         Vector3 location = GetRandomVector3(_lowerBound, _upperBound);
         blob.transform.position = location;
-        _blobCount++;
     }
 
     private void PoolObjectRelease(Blob blob) {
         blob.gameObject.SetActive(false);
-        _blobCount--;
     }
 
     // Should be the first method that's called in this class
     // Ensures proper transform values
-    private void CheckTranform() {
+    private void CheckTransform() {
         if (transform.localScale.x < 0 || transform.localScale.y < 0 || transform.localScale.z < 0) {
             throw new ArgumentException("BlobSpawn's scale cannot be negative.");
         }
