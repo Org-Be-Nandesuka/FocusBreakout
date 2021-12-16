@@ -1,11 +1,11 @@
-using Cinemachine;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : Blob {
     [SerializeField] private float _cameraShakeStrength; 
-    [SerializeField] private float _cameraShakeFrequency; 
+    [SerializeField] private float _cameraShakeFrequency;
     [SerializeField] private HealthBar _healthBar; // UI representation of player's health
     [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
     [SerializeField] private GameObject _bulletHitPrefab; // particle effect when hit by bullet
@@ -78,6 +78,7 @@ public class Player : Blob {
     public int DamageTaken {
         get { return _damageTaken; }
     }
+
 
     protected override void OnValidate() {
         base.OnValidate();
