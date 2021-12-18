@@ -96,7 +96,7 @@ public class BulletController : MonoBehaviour {
 
         if (Physics.Raycast(transform.position, dir, out hit, Constants.MaxMapDistance)) {
             if (hit.collider.CompareTag("Blob")) {
-                _target.GetComponent<Blob>().TakeDamage(_damage);
+                _target.GetComponent<BasicBlob>().TakeDamage(_damage);
             } else {
                 _bulletTerrainHit.transform.position = hit.point;
                 AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);

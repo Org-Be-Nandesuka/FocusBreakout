@@ -107,8 +107,8 @@ GameObject:
   - component: {fileID: 5056332575781745586}
   - component: {fileID: 5056332575781745587}
   - component: {fileID: 5056332575781745588}
+  - component: {fileID: 8963986999331542430}
   - component: {fileID: 5056332575781745589}
-  - component: {fileID: 5543900363821841241}
   - component: {fileID: -7103468127680800691}
   m_Layer: 0
   m_Name: Blob
@@ -125,7 +125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056332575781745590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.46, y: 2.52, z: 8.11}
+  m_LocalPosition: {x: -14.785874, y: 1.1827406, z: -28.612059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5056332575709166751}
@@ -182,6 +182,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8963986999331542430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056332575781745590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee152d38fb7cc94db79f5422d44f054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 1
+  _audioArray: []
+  _blobData:
+    _lifespan: 0.01
+    _speed: 0
+    _directionChangeTime: 0
+    _moveDirection: {x: 0, y: 0, z: 0}
+    _facingDirection: {x: 0, y: 0, z: 0}
 --- !u!135 &5056332575781745589
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -195,35 +215,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5543900363821841241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5056332575781745590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a84eeaf23287ea4dbdb6fc56b6cf3ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 1
-  _lifespan: 5
-  _speed: 0
-  _directionChangeTime: 2
-  __facingDirection: {x: 1, y: 0, z: 0}
-  _audioArray:
-  - _name: Wilhelm
-    _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
-    _audioMixerGroup: {fileID: 0}
-    _volume: 0.05
-    _loop: 0
-  - _name: Hit
-    _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
-    _audioMixerGroup: {fileID: 0}
-    _volume: 0.5
-    _loop: 0
-  _worldDirection: {x: 1, y: 1, z: 1}
 --- !u!143 &-7103468127680800691
 CharacterController:
   m_ObjectHideFlags: 0
