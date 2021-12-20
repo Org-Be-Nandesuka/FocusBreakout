@@ -111,10 +111,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blob: {fileID: 8963986999331542430, guid: fd583e91ccd177a479df87b76c2731d3, type: 3}
   _maxBlobs: 10
-  _spawnRate: 0.1
-  _blobDataArray:
-  - _lifespan: 0
-    _speed: 10
-    _directionChangeTime: 2
-    _moveDirection: {x: 0, y: 0, z: 0}
-    _facingDirection: {x: 0, y: 0, z: 0}
+  _spawnRate: 0.2
+  _blobBehaviorArray: []

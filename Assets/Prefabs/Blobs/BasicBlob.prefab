@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5056332575781745589}
   - component: {fileID: -7103468127680800691}
   m_Layer: 0
-  m_Name: Blob
+  m_Name: BasicBlob
   m_TagString: Blob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5056332575781745590}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.785874, y: 1.1827406, z: -28.612059}
+  m_LocalPosition: {x: -15.942009, y: 5.1849394, z: -23.962341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5056332575709166751}
@@ -196,12 +196,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 1
   _audioArray: []
-  _blobData:
-    _lifespan: 0.01
-    _speed: 0
-    _directionChangeTime: 0
-    _moveDirection: {x: 0, y: 0, z: 0}
-    _facingDirection: {x: 0, y: 0, z: 0}
 --- !u!135 &5056332575781745589
 SphereCollider:
   m_ObjectHideFlags: 0

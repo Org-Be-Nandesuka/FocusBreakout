@@ -4,17 +4,17 @@ using UnityEngine.Pool;
 
 public class BasicBlob : Blob {
     [SerializeField] private Audio[] _audioArray;
-    [SerializeField] private BlobBehavior _blobData;
 
+    private BlobBehavior _blobBehavior;
     private ObjectPool<BasicBlob> _blobPool;
     private Vector3 _worldDirection;
     private CharacterController _controller;
     private Coroutine _currentCoroutine;
 
-    void Start() {
-        //_blobData = new BlobBehavior();
-        _blobData.CheckData();
+    void Awake() {
         _controller = GetComponent<CharacterController>();
+        _blobBehavior = new BlobBehavior();
+        _blobBehavior.CheckData();
 
         foreach (Audio audio in _audioArray) {
             audio.Source = gameObject.AddComponent<AudioSource>();
@@ -22,38 +22,42 @@ public class BasicBlob : Blob {
     }
 
     void FixedUpdate() {
-        _controller.Move(_worldDirection * _blobData.Speed * Time.fixedDeltaTime);
+        _controller.Move(_worldDirection * _blobBehavior.Speed * Time.fixedDeltaTime);
     }
 
     void OnEnable() {
-        // Goes to default Blob Behavior (prefab)
-        if (_blobData == null) {
-            return;
-        }
-
-        if (_blobData.Lifespan != 0) {
+        if (_blobBehavior.Lifespan != 0) {
             StartCoroutine(LifespanCoroutine());
         }
 
+        if (_blobBehavior.DirectionChangeTime != 0) {
+            _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
+        }
+
         ResetCurrentHealth();
-        _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
-        _worldDirection = _blobData.MoveDirection;
-        transform.rotation = Quaternion.Euler(_blobData.FacingDirection);
+        _worldDirection = _blobBehavior.MoveDirection;
+        // transform.rotation = Quaternion.LookRotation(...) also works. I chose transform.forward
+        // because it doesn't require a method and therefore should be more efficient. However,
+        // I am not entirely sure how I feel about messing with the Blob's "forward" direction...
+        transform.forward = _blobBehavior.FacingDirection;
     }
 
     IEnumerator LifespanCoroutine() {
-        yield return new WaitForSeconds(_blobData.Lifespan);
+        yield return new WaitForSeconds(_blobBehavior.Lifespan);
         Die();
     }
 
     IEnumerator ReverseDirectionCoroutine() {
-        yield return new WaitForSeconds(_blobData.DirectionChangeTime);
+        yield return new WaitForSeconds(_blobBehavior.DirectionChangeTime);
         ReverseDirection();
     }
 
     private void ReverseDirection() {
-        StopCoroutine(_currentCoroutine);
-        _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
+        if (_blobBehavior.DirectionChangeTime != 0) {
+            StopCoroutine(_currentCoroutine);
+            _currentCoroutine = StartCoroutine(ReverseDirectionCoroutine());
+        }
+
         _worldDirection *= -1;
     }
 
@@ -65,11 +69,11 @@ public class BasicBlob : Blob {
         ReverseDirection();
     }
 
-    public BlobBehavior BlobData {
-        get { return _blobData; }
+    public BlobBehavior BasicBlobBehavior {
+        get { return _blobBehavior; }
         set {
             value.CheckData();
-            _blobData = value;
+            _blobBehavior = value;
         }
     }
 

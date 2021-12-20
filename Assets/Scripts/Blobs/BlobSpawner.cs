@@ -13,7 +13,7 @@ using Random = UnityEngine.Random;
 /// </para>
 /// 
 /// <para>
-/// The translucent grey cube seen in Scene View will not be seen in Game View.
+/// The translucent blue cube seen in Scene View will not be seen in Game View.
 /// </para>
 /// </summary>
 public class BlobSpawner : MonoBehaviour {
@@ -30,7 +30,7 @@ public class BlobSpawner : MonoBehaviour {
     void Start() {
         CheckTransform();
         if (_blobBehaviorArray.Length == 0) {
-            throw new ArgumentException("Blob Data Array cannot be empty.");
+            throw new ArgumentException("Blob Behavior Array cannot be empty.");
         }
 
         foreach(BlobBehavior data in _blobBehaviorArray) {
@@ -43,7 +43,7 @@ public class BlobSpawner : MonoBehaviour {
 
         _upperBound = GetUpperBound(position, scale, blobRadius);
         _lowerBound = GetLowerBound(position, scale, blobRadius);
-        _blobPool = new ObjectPool<BasicBlob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease, 
+        _blobPool = new ObjectPool<BasicBlob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease,
             maxSize: _maxBlobs);
 
         // Initiates Blobs
@@ -104,28 +104,25 @@ public class BlobSpawner : MonoBehaviour {
     /// <summary>
     /// When a game object is first instantiated so it can be placed in a pool.
     /// </summary>
-    private BasicBlob PoolObjectCreate() {        
+    private BasicBlob PoolObjectCreate() {
         BasicBlob blob = Instantiate(_blob);
         blob.BlobPool = _blobPool;
-        blob = SetUpBlob(blob);
         return blob;
-    }
-
-    /// <summary>
-    /// When a game object is taken from its pool.
-    /// </summary>
-    /// <param name="blob"></param>
-    private void PoolObjectGet(BasicBlob blob) {
-        blob = SetUpBlob(blob);
-        blob.gameObject.SetActive(true);
     }
 
     /// <summary>
     /// When a game object is returned back to its pool.
     /// </summary>
-    /// <param name="blob"></param>
     private void PoolObjectRelease(BasicBlob blob) {
         blob.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// When a game object is taken from its pool.
+    /// </summary>
+    private void PoolObjectGet(BasicBlob blob) {
+        blob = SetUpBlob(blob);
+        blob.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -136,7 +133,7 @@ public class BlobSpawner : MonoBehaviour {
         int idx = Random.Range(0, _blobBehaviorArray.Length);
 
         blob.transform.position = location;
-        blob.BlobData = _blobBehaviorArray[idx];
+        blob.BasicBlobBehavior = _blobBehaviorArray[idx];
         return blob;
     }
 
