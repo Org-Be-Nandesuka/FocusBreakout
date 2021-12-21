@@ -13,32 +13,36 @@ using Random = UnityEngine.Random;
 /// </para>
 /// 
 /// <para>
-/// The translucent grey cube seen in Scene View will not be seen in Game View.
+/// The translucent blue cube seen in Scene View will not be seen in Game View.
 /// </para>
 /// </summary>
 public class BlobSpawner : MonoBehaviour {
-    [SerializeField] private Blob _blob;
-    [SerializeField] Vector3[] _moveDirectionArray;
+    [SerializeField] private BasicBlob _blob;
     [SerializeField] private int _maxBlobs;
     [Tooltip("(Blob's Lifespan) / (Spawn Rate) should be at least Max Blobs")]
     [SerializeField] private float _spawnRate;
+    [SerializeField] private BlobBehavior[] _blobBehaviorArray;
 
     private Vector3 _upperBound;
     private Vector3 _lowerBound;
-    private ObjectPool<Blob> _blobPool;
+    private ObjectPool<BasicBlob> _blobPool;
 
     void Start() {
         CheckTransform();
+        if (_blobBehaviorArray.Length == 0) {
+            throw new ArgumentException("Blob Behavior Array cannot be empty.");
+        }
+
         Vector3 position = transform.position;
         Vector3 scale = transform.localScale;
         float blobRadius = _blob.transform.localScale.y / 2f;
 
         _upperBound = GetUpperBound(position, scale, blobRadius);
         _lowerBound = GetLowerBound(position, scale, blobRadius);
-        _blobPool = new ObjectPool<Blob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease, 
+        _blobPool = new ObjectPool<BasicBlob>(PoolObjectCreate, PoolObjectGet, PoolObjectRelease,
             maxSize: _maxBlobs);
 
-        // Starts the spawner with Max Blobs
+        // Initiates Blobs
         for (int i = 0; i < _maxBlobs; i++) {
             _blobPool.Get();
         }
@@ -93,23 +97,41 @@ public class BlobSpawner : MonoBehaviour {
         return new Vector3(x, y, z);
     }
 
-    private Blob PoolObjectCreate() {
-        Vector3 location = GetRandomVector3(_lowerBound, _upperBound);
-        Blob blob = Instantiate(_blob, location, Quaternion.identity);
+    /// <summary>
+    /// When a game object is first instantiated so it can be placed in a pool.
+    /// </summary>
+    private BasicBlob PoolObjectCreate() {
+        BasicBlob blob = Instantiate(_blob);
         blob.BlobPool = _blobPool;
         return blob;
     }
 
-    private void PoolObjectGet(Blob blob) {
-        blob.gameObject.SetActive(true);
-        Vector3 location = GetRandomVector3(_lowerBound, _upperBound);
-        blob.transform.position = location;
-    }
-
-    private void PoolObjectRelease(Blob blob) {
+    /// <summary>
+    /// When a game object is returned back to its pool.
+    /// </summary>
+    private void PoolObjectRelease(BasicBlob blob) {
         blob.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// When a game object is taken from its pool.
+    /// </summary>
+    private void PoolObjectGet(BasicBlob blob) {
+        blob = SetUpBlob(blob);
+        blob.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Gives a blob a new random location and behavior.
+    /// </summary>
+    private BasicBlob SetUpBlob(BasicBlob blob) {
+        Vector3 location = GetRandomVector3(_lowerBound, _upperBound);
+        int idx = Random.Range(0, _blobBehaviorArray.Length);
+
+        blob.transform.position = location;
+        blob.BasicBlobBehavior = _blobBehaviorArray[idx];
+        return blob;
+    }
 
     /// <summary>
     /// Ensures proper transform values and should be trhe first method called.
