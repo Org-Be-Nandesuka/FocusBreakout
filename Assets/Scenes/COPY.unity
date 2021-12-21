@@ -16664,7 +16664,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16694,12 +16694,12 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._lifespan
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[1]._lifespan
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16714,17 +16714,17 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._moveDirection.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._moveDirection.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._moveDirection.z
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16734,12 +16734,12 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[1]._moveDirection.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[1]._moveDirection.z
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16759,7 +16759,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._facingDirection.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16784,7 +16784,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[1]._directionChangeTime
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}

@@ -14,7 +14,6 @@ public class BasicBlob : Blob {
     void Awake() {
         _controller = GetComponent<CharacterController>();
         _blobBehavior = new BlobBehavior();
-        _blobBehavior.CheckData();
 
         foreach (Audio audio in _audioArray) {
             audio.Source = gameObject.AddComponent<AudioSource>();
@@ -83,10 +82,7 @@ public class BasicBlob : Blob {
 
     public BlobBehavior BasicBlobBehavior {
         get { return _blobBehavior; }
-        set {
-            value.CheckData();
-            _blobBehavior = value;
-        }
+        set { _blobBehavior = value; }
     }
 
     public ObjectPool<BasicBlob> BlobPool {

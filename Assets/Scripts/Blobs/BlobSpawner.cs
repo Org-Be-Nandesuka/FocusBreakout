@@ -33,10 +33,6 @@ public class BlobSpawner : MonoBehaviour {
             throw new ArgumentException("Blob Behavior Array cannot be empty.");
         }
 
-        foreach(BlobBehavior data in _blobBehaviorArray) {
-            data.CheckData();
-        }
-
         Vector3 position = transform.position;
         Vector3 scale = transform.localScale;
         float blobRadius = _blob.transform.localScale.y / 2f;
