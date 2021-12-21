@@ -104,9 +104,6 @@ https://youtu.be/_PzYAbPpK8k
 Push Objects Tutorial:
 https://youtu.be/3BOn2gs7z04 
 
-Searchlight Random AI Movement:
-https://github.com/Xemicolon1/Unity-Random-AI-movement 
-
 Pillar Texture:
 https://assetstore.unity.com/packages/2d/textures-materials/floors/dungeon-ground-texture-3329 
 
