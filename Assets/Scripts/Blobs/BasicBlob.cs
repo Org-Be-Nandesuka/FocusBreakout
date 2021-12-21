@@ -21,6 +21,10 @@ public class BasicBlob : Blob {
         }
     }
 
+    void Update() {
+        
+    }
+
     void FixedUpdate() {
         _controller.Move(_worldDirection * _blobBehavior.Speed * Time.fixedDeltaTime);
     }
@@ -39,7 +43,11 @@ public class BasicBlob : Blob {
         // transform.rotation = Quaternion.LookRotation(...) also works. I chose transform.forward
         // because it doesn't require a method and therefore should be more efficient. However,
         // I am not entirely sure how I feel about messing with the Blob's "forward" direction...
-        transform.forward = _blobBehavior.FacingDirection;
+        if (_blobBehavior.FaceMoveDirection) {
+            transform.forward = _worldDirection;
+        } else {
+            transform.forward = _blobBehavior.FacingDirection;
+        } 
     }
 
     IEnumerator LifespanCoroutine() {
@@ -59,6 +67,10 @@ public class BasicBlob : Blob {
         }
 
         _worldDirection *= -1;
+
+        if (_blobBehavior.FaceMoveDirection) {
+            transform.forward = _worldDirection;
+        } 
     }
 
     protected override void Die() {

@@ -7,23 +7,26 @@ using UnityEngine;
 /// </summary>
 [Serializable]
 public class BlobBehavior {
-    // How long until automatic death, 0 implies they won't die based on time.
+    // Time until automatic death, 0 = they won't die based on time.
     [SerializeField] [Min(0)] private float _lifespan; 
-    // 0 implies no movement.
+    // 0 = no movement.
     [SerializeField] [Min(0)] private float _speed; 
-    // Howe long until they change their movement direction, 
-    // 0 implies they only change direction from collisions.
+    // Time until they flip their movement direction, 0 = only change direction from collisions.
     [SerializeField] [Min(0)] private float _directionChangeTime;
-    // (0, 0, 0) implies no movement
+    // (0, 0, 0) = no movement
     [SerializeField] [Min(-1)] private Vector3 _moveDirection;
+    // Overrides Facing Direction and will face the direction they are moving in.
+    [SerializeField] private bool _faceMoveDirection;
     // (0,0,0) will be automatically changed to (0, 0, 1) ie: "forward".
     [SerializeField] [Min(-1)] private Vector3 _facingDirection;
 
-    public BlobBehavior(float lifespan, float speed, float dirChangeTime, Vector3 moveDir, Vector3 faceDir) {
+    public BlobBehavior(float lifespan, float speed, float dirChangeTime, 
+        Vector3 moveDir, bool faceMoveDir, Vector3 faceDir) {
         _lifespan = lifespan;
         _speed = speed;
         _directionChangeTime = dirChangeTime;
         _moveDirection = moveDir;
+        _faceMoveDirection = faceMoveDir;
         _facingDirection = faceDir;
 
         CheckData();
@@ -34,6 +37,7 @@ public class BlobBehavior {
         _speed = 0;
         _directionChangeTime = 0;
         _moveDirection = Vector3.zero;
+        _faceMoveDirection = false;
         _facingDirection = Vector3.forward;
     }
 
@@ -84,7 +88,17 @@ public class BlobBehavior {
         get { return _moveDirection; }
     }
 
+    public bool FaceMoveDirection {
+        get { return _faceMoveDirection; }
+    }
+
     public Vector3 FacingDirection {
         get { return _facingDirection; }
+    }
+
+    // This does not run automatically, call this from a 
+    // different OnValidate() in a monobehavior class.
+    public void OnValidate() {
+
     }
 }
