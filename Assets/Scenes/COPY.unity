@@ -16679,7 +16679,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._speed
-      value: 10
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16694,7 +16694,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._lifespan
-      value: 2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16719,12 +16719,12 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._moveDirection.y
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._moveDirection.z
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16759,17 +16759,17 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._facingDirection.x
-      value: 0
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._facingDirection.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._facingDirection.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -16779,7 +16779,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._directionChangeTime
-      value: 0
+      value: 5.67
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}

@@ -17,7 +17,7 @@ public class BlobBehavior : ISerializationCallbackReceiver {
     [SerializeField] private Vector3 _moveDirection;
     // Overrides Facing Direction and will face the direction they are moving in.
     [SerializeField] private bool _faceMoveDirection;
-    // (0, 0, 0) = faces "forward"
+    // (0, 0, 0) will be changed to (0, 0, 1)
     [SerializeField] private Vector3 _facingDirection;
 
     // min/max values for normalized Vector
@@ -98,7 +98,12 @@ public class BlobBehavior : ISerializationCallbackReceiver {
     }
 
     public Vector3 FacingDirection {
-        get { return _facingDirection; }
+        get { 
+            if (_facingDirection == Vector3.zero) {
+                _facingDirection = Vector3.forward;
+            }
+            return _facingDirection; 
+        }
     }
 
     public void OnBeforeSerialize() {
@@ -128,6 +133,6 @@ public class BlobBehavior : ISerializationCallbackReceiver {
             _facingDirection.y = Mathf.Clamp(_facingDirection.y, _minVecVal, _maxVecVal);
         } else if (_facingDirection.z < _minVecVal || _facingDirection.z > _maxVecVal) {
             _facingDirection.z = Mathf.Clamp(_facingDirection.z, _minVecVal, _maxVecVal);
-        } 
+        }
     }
 }
