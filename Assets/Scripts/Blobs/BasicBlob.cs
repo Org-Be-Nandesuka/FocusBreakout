@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[ExecuteInEditMode()]
 public class BasicBlob : Blob {
     [SerializeField] private Audio[] _audioArray;
 
