@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 
 /// <summary>
 /// Represents a 3D space where blobs can spawn. This spawner accounts for blob radius to 
-/// ensure the blobs spawning near or on the face of the cube do not poke out.
+/// ensure the blobs spawning near or on the face of the cube do not have their body poke out.
+/// Only exception is if the Blob's scale is larger than that of the cube on any of the axes.
 /// 
 /// <para>
 /// Blob Spawner's scale cannot be negative and its roation must be (0, 0, 0).
@@ -137,12 +138,16 @@ public class BlobSpawner : MonoBehaviour {
     /// Ensures proper transform values and should be trhe first method called.
     /// </summary>
     private void CheckTransform() {
-        if (transform.localScale.x < 0 || transform.localScale.y < 0 || transform.localScale.z < 0) {
-            throw new ArgumentException("BlobSpawn's scale cannot be negative.");
+        if (transform.localScale.x < 0 || 
+            transform.localScale.y < 0 || 
+            transform.localScale.z < 0) {
+            throw new ArgumentException("BlobSpawner's scale cannot be negative.");
         }
 
-        if (transform.rotation.x != 0 || transform.rotation.y != 0 || transform.rotation.z != 0) {
-            throw new ArgumentException("BlobSpawn's rotation must be (0,0,0).");
+        if (transform.rotation.x != 0 || 
+            transform.rotation.y != 0 || 
+            transform.rotation.z != 0) {
+            throw new ArgumentException("BlobSpawner's rotation must be (0,0,0).");
         }
     }
 

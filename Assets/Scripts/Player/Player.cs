@@ -8,9 +8,9 @@ public class Player : Blob {
     [SerializeField] private float _speed;
     [SerializeField] private float _cameraShakeStrength; 
     [SerializeField] private float _cameraShakeFrequency;
-    [SerializeField] private HealthBar _healthBar; // UI representation of player's health
-    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
-    [SerializeField] private GameObject _bulletHitPrefab; // particle effect when hit by bullet
+    [SerializeField] private HealthBar _healthBar; 
+    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; 
+    [SerializeField] private GameObject _bulletHitPrefab;
 
     // _hitEffectDur - _hitEffectDurRange should not be negative
     // the resulting float may be used in WaitForSeconds()
@@ -52,7 +52,8 @@ public class Player : Blob {
     // VFX when player is hit.
     IEnumerator BulletHitCoroutine() {
         Renderer[] rendererArray = gameObject.GetComponentsInChildren<Renderer>();
-        float time = UnityEngine.Random.Range(_hitEffectDur - _hitEffectDurRange, _hitEffectDur + _hitEffectDurRange);
+        float time = UnityEngine.Random.Range(_hitEffectDur - _hitEffectDurRange,
+            _hitEffectDur + _hitEffectDurRange);
 
         foreach (Renderer r in rendererArray) {
             r.enabled = false;

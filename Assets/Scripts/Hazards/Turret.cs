@@ -8,15 +8,16 @@ using Random = UnityEngine.Random;
 public class Turret : MonoBehaviour {
     [SerializeField] private float _fireRate;
     [SerializeField] private int _damage;
-    [SerializeField] private float _spread; // spread applied on blob radius
+    // Represents where the bullet may land when firing at a Blob.
+    // Spread that is equal or less than the Blob's radius results in perfect accuracy.
+    [SerializeField] private float _spread;
     [SerializeField] private TargetArea _targetArea;
     [SerializeField] private GameObject _bulletTerrainHit;
     [SerializeField] private Audio[] _audioArray;
 
-    // _hitEffectDur - _hitEffectDurRange should not be negative
-    // the resulting float may be used in WaitForSeconds()
-    private const float _hitEffectDur = 0.1f;
-    private const float _hitEffectDurRange = 0.05f;
+    private const float _minHitEffectDur = 0.05f;
+    private const float _maxHitEffectDur = 0.15f;
+    private const float _maxDistance = Constants.MaxMapDistance;
 
     // LineRenderer 'Flashing' Stats
     private const float _onTime = 0.02f;
@@ -26,9 +27,7 @@ public class Turret : MonoBehaviour {
     private Blob _target;
     private LineRenderer _lineRenderer;
     private ParticleSystem _muzzleFlash;
-    private Vector3 _targetDirection;
     private float _nextTimeToFire;
-    private bool _targetNeeded;
 
     void Start() {
         foreach (Audio audio in _audioArray) {
@@ -41,11 +40,8 @@ public class Turret : MonoBehaviour {
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
 
-        _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform.position, Quaternion.identity);
+        _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform);
         _bulletTerrainHit.SetActive(false);
-
-        _targetNeeded = true;
-        _targetDirection = Vector3.zero;
     }
 
     void Update() {
@@ -53,7 +49,9 @@ public class Turret : MonoBehaviour {
         TargetBlob();
     }
 
-    // Shooter will find and follow a blob (as long as it's "visible")
+    /// <summary>
+    /// Shooter will find and follow a blob (as long as it's "visible")
+    /// </summary>
     private void TargetBlob() {
         Vector3 targetDirection;
         RaycastHit hit;
@@ -71,7 +69,7 @@ public class Turret : MonoBehaviour {
         targetDirection = GetTargetDirection(_target);
 
         // Check if it's "visible" by the shooter
-        if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, _maxDistance)) {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
                 _target = hit.collider.gameObject.GetComponent<Blob>();
@@ -87,7 +85,10 @@ public class Turret : MonoBehaviour {
         }
     }
 
-    // Imitates a gun shooting at a blob
+    /// <summary>
+    /// Imitates a gun shooting at a Blob. This uses _spread as its accuracy.
+    /// </summary>
+    /// <param name="targetDir">Location to shoot at</param>
     private void ShootBlob(Vector3 targetDir) {
         Vector3 targetDirection = AimSpread(targetDir);
         RaycastHit hit;
@@ -95,7 +96,7 @@ public class Turret : MonoBehaviour {
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
 
-        if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, _maxDistance)) {
             _lineRenderer.SetPosition(1, hit.point);
             if (hit.collider.CompareTag("Blob")) {
                 _target.TakeDamage(_damage);
@@ -113,13 +114,15 @@ public class Turret : MonoBehaviour {
         return blob.transform.position - transform.position;
     }
 
-    // picks a random point inside a sphere with _spread as the radius
+    /// <summary>
+    /// picks a random point inside a sphere with _spread as the radius
+    /// </summary>
     private Vector3 AimSpread(Vector3 pos) {
         return Random.insideUnitSphere * _spread + pos;
     }
 
     IEnumerator TerrainHitCoroutine() {
-        float time = Random.Range(_hitEffectDur - _hitEffectDurRange, _hitEffectDur + _hitEffectDurRange);
+        float time = Random.Range(_minHitEffectDur, _maxHitEffectDur);
         _bulletTerrainHit.SetActive(true);
 
         yield return new WaitForSeconds(time);

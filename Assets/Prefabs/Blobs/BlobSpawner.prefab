@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4311795739205642495}
   - component: {fileID: 4311795739205642494}
   - component: {fileID: 4311795739205642489}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: BlobSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
