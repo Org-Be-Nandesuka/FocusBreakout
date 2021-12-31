@@ -10,6 +10,10 @@ public abstract class Blob : MonoBehaviour {
 
     private int _currentHealth;
 
+    private void Start() {
+        _currentHealth = _maxHealth;
+    }
+
     public virtual void TakeDamage(int dmg) {
         if (dmg <= 0) {
             throw new ArgumentException("Can't deal " + dmg + " damage, needs to be at least 0");

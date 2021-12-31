@@ -21,7 +21,7 @@ public class Player : Blob {
     private int _damageTaken;
 
 
-    void Start() {
+    void Awake() {
         _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(MaxHealth);
         _damageTaken = 0;
@@ -32,8 +32,10 @@ public class Player : Blob {
     }
 
     public override void TakeDamage(int dmg) {
-        base.TakeDamage(dmg);
         _damageTaken += dmg;
+        StartCoroutine(BulletHitCoroutine());
+        base.TakeDamage(dmg);
+        _healthBar.SetHealth(CurrentHealth);
     }
 
     protected override void Die() {

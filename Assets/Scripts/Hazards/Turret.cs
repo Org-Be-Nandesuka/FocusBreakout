@@ -48,8 +48,6 @@ public class Turret : MonoBehaviour {
 
     void Update() {
         _lineRenderer.SetPosition(0, transform.position);
-        _muzzleFlash.transform.position = transform.position;
-        _muzzleFlash.transform.rotation = transform.rotation;
         TargetBlob();
     }
 
@@ -70,7 +68,7 @@ public class Turret : MonoBehaviour {
         if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
-                //target = hit.collider.gameObject.GetComponent<Blob>();
+                target = hit.collider.gameObject.GetComponent<Blob>();
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
                 // Cast LineRenderer to location after shooter spread is applied

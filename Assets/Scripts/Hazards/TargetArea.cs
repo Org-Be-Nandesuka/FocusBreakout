@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 /// <summary>
 /// Contains an array of all the game objects with the layer "Target" within its cube.
-/// The Z scale of this game object cannot be negative or an exception will be thrown.
+/// Scale axes of this game object must be positive or an exception will be thrown.
 /// </summary>
 public class TargetArea : MonoBehaviour {
     private RaycastHit[] _hitArray;
@@ -11,8 +11,10 @@ public class TargetArea : MonoBehaviour {
     private int _layerMask;
 
     void Start() {
-        if (transform.localScale.z < 0) {
-            throw new ArgumentException("Z scale cannot be negative.");
+        if (transform.localScale.x <= 0 || 
+            transform.localScale.y <= 0 || 
+            transform.localScale.z <= 0) {
+            throw new ArgumentException("Scale axes must be positive.");
         }
 
         _halfScale = transform.localScale / 2f;
@@ -24,7 +26,6 @@ public class TargetArea : MonoBehaviour {
         // therefore our input size is divided by 2.
         _hitArray = Physics.BoxCastAll(transform.position, _halfScale, transform.forward,
             transform.rotation, 0, _layerMask);
-        print(_hitArray.Length);
     }
 
     public RaycastHit[] HitArray {
