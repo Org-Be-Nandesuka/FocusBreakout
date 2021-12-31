@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 /// <summary>
 /// Contains an array of all the game objects with the layer "Target" within its cube.
 /// The Z scale of this game object cannot be negative or an exception will be thrown.
@@ -24,13 +25,19 @@ public class TargetArea : MonoBehaviour {
         _hitArray = Physics.BoxCastAll(transform.position, _halfScale, transform.forward,
             transform.rotation, 0, _layerMask);
         print(_hitArray.Length);
-        foreach (RaycastHit hit in _hitArray) {
-            // do smth
-        }            
     }
 
     public RaycastHit[] HitArray {
         get { return _hitArray; }
+    }
+
+    public Blob GetRandomBlob() {
+        if (_hitArray.Length == 0) {
+            return null;
+        }
+
+        int idx = Random.Range(0, _hitArray.Length);
+        return _hitArray[idx].collider.gameObject.GetComponent<Blob>();
     }
 
     void OnDrawGizmos() {
