@@ -9,6 +9,7 @@ public class TargetArea : MonoBehaviour {
     private RaycastHit[] _hitArray;
     private Vector3 _halfScale;
     private int _layerMask;
+    private Blob _selectedBlob;
 
     void Start() {
         if (transform.localScale.x <= 0 || 
@@ -28,9 +29,6 @@ public class TargetArea : MonoBehaviour {
             transform.rotation, 0, _layerMask);
     }
 
-    public RaycastHit[] HitArray {
-        get { return _hitArray; }
-    }
 
     public Blob GetRandomBlob() {
         if (_hitArray.Length == 0) {
@@ -39,6 +37,27 @@ public class TargetArea : MonoBehaviour {
 
         int idx = Random.Range(0, _hitArray.Length);
         return _hitArray[idx].collider.gameObject.GetComponent<Blob>();
+    }
+
+    public bool IsEmpty() {
+        if (_hitArray.Length == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+/*    public Blob SelectedBlob {
+        get { 
+            if (Array.Exists(_hitArray, _selectedBlob)) {
+
+            }
+            return _selectedBlob; 
+        }
+    }*/
+
+    public RaycastHit[] HitArray {
+        get { return _hitArray; }
     }
 
     void OnDrawGizmos() {

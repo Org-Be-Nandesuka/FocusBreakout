@@ -23,11 +23,12 @@ public class Turret : MonoBehaviour {
     private const float _offTime = 0.04f;
     private const int _interations = 3;
 
-    private GameObject _target;
+    private Blob _target;
     private LineRenderer _lineRenderer;
     private ParticleSystem _muzzleFlash;
+    private Vector3 _targetDirection;
     private float _nextTimeToFire;
-    private bool _newTarget;
+    private bool _targetNeeded;
 
     void Start() {
         foreach (Audio audio in _audioArray) {
@@ -35,7 +36,7 @@ public class Turret : MonoBehaviour {
         }
 
         _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.enabled = false;
+        _lineRenderer.enabled = true;
 
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
@@ -43,7 +44,8 @@ public class Turret : MonoBehaviour {
         _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform.position, Quaternion.identity);
         _bulletTerrainHit.SetActive(false);
 
-        _newTarget = true;
+        _targetNeeded = true;
+        _targetDirection = Vector3.zero;
     }
 
     void Update() {
@@ -55,59 +57,53 @@ public class Turret : MonoBehaviour {
     private void TargetBlob() {
         Vector3 targetDirection;
         RaycastHit hit;
-        Blob target = _targetArea.GetRandomBlob();
 
-        if (target == null) {
-            return;
+        // Find blob
+        if (_target == null) {
+            // returns null if there are no Blobs in Target Area
+            _target = _targetArea.GetRandomBlob();
+
+            if (_target == null) {
+                return;
+            }
         }
 
-        targetDirection = GetTargetDirection(target);
-        targetDirection = AimSpread(targetDirection); // Apply shooter spread
+        targetDirection = GetTargetDirection(_target);
 
         // Check if it's "visible" by the shooter
         if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
-                target = hit.collider.gameObject.GetComponent<Blob>();
+                _target = hit.collider.gameObject.GetComponent<Blob>();
+                _lineRenderer.SetPosition(1, hit.point);
                 transform.rotation = Quaternion.FromToRotation(Vector3.forward, targetDirection);
 
-                // Cast LineRenderer to location after shooter spread is applied
-                /*                if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
-                                    _lineRenderer.SetPosition(1, hit.point);
-                                    if (_newTarget) {
-                                        _newTarget = false;
-                                        StartCoroutine(FlashLineRendererCoroutine(_onTime, _offTime, _interations));
-                                    }
-                                }*/
                 if (Time.time >= _nextTimeToFire) {
-                    //ShootBlob(target);
-                    _nextTimeToFire = Time.time + _fireRate;
-                    _muzzleFlash.Play();
-                    target.TakeDamage(_damage);
+                    ShootBlob(targetDirection);
                 }
             } else {
-                print("target null");
-                target = null;
+                _target = null;
             }
         }
     }
 
     // Imitates a gun shooting at a blob
-    private void ShootBlob(Blob blob) {
+    private void ShootBlob(Vector3 targetDir) {
+        Vector3 targetDirection = AimSpread(targetDir);
         RaycastHit hit;
 
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
-        //AudioSource.PlayClipAtPoint(_audioArray[0].Clip, transform.position, _audioArray[0].Volume);
 
-        if (Physics.Raycast(transform.position, blob.transform.position, out hit, Constants.MaxMapDistance)) {
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Constants.MaxMapDistance)) {
+            _lineRenderer.SetPosition(1, hit.point);
             if (hit.collider.CompareTag("Blob")) {
-                blob.TakeDamage(_damage);
-                print(_damage);
+                _target.TakeDamage(_damage);
+                if (!_target.gameObject.activeSelf) {
+                    _target = null;
+                }
             } else {
                 _bulletTerrainHit.transform.position = hit.point;
-                //AudioSource.PlayClipAtPoint(_audioArray[1].Clip, hit.point, _audioArray[1].Volume);
-                //AudioSource.PlayClipAtPoint(_audioArray[2].Clip, hit.point, _audioArray[2].Volume);
                 StartCoroutine(TerrainHitCoroutine());
             }
         }
