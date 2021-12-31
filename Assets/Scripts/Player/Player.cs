@@ -38,6 +38,11 @@ public class Player : Blob {
         _healthBar.SetHealth(CurrentHealth);
     }
 
+    public override void Heal(int num) {
+        base.Heal(num);
+        _healthBar.SetHealth(CurrentHealth);
+    }
+
     protected override void Die() {
         DataManager.GameOverMessage = "Get Rekt' Scrub";
         Cursor.lockState = CursorLockMode.Confined;
