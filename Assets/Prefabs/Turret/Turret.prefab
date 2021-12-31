@@ -298,9 +298,8 @@ MonoBehaviour:
   _damage: 1
   _spread: 0.6
   _targetArea: {fileID: 0}
-  _bulletTerrainHit: {fileID: 4331324054051814625, guid: b5d27caa31d44474fab57d3b1263d68c,
+  _turretTerrainHit: {fileID: 4331324054051814625, guid: b5d27caa31d44474fab57d3b1263d68c,
     type: 3}
-  _audioArray: []
 --- !u!1 &4977226106548650521
 GameObject:
   m_ObjectHideFlags: 0

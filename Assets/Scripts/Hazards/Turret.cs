@@ -12,8 +12,7 @@ public class Turret : MonoBehaviour {
     // Spread that is equal or less than the Blob's radius results in perfect accuracy.
     [SerializeField] private float _spread;
     [SerializeField] private TargetArea _targetArea;
-    [SerializeField] private GameObject _bulletTerrainHit;
-    [SerializeField] private Audio[] _audioArray;
+    [SerializeField] private GameObject _turretTerrainHit;
 
     private const float _minHitEffectDur = 0.05f;
     private const float _maxHitEffectDur = 0.15f;
@@ -30,18 +29,14 @@ public class Turret : MonoBehaviour {
     private float _nextTimeToFire;
 
     void Start() {
-        foreach (Audio audio in _audioArray) {
-            audio.Source = gameObject.AddComponent<AudioSource>();
-        }
-
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.enabled = true;
 
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _nextTimeToFire = 0f;
 
-        _bulletTerrainHit = Instantiate(_bulletTerrainHit, transform);
-        _bulletTerrainHit.SetActive(false);
+        _turretTerrainHit = Instantiate(_turretTerrainHit, transform);
+        _turretTerrainHit.SetActive(false);
     }
 
     void Update() {
@@ -104,7 +99,7 @@ public class Turret : MonoBehaviour {
                     _target = null;
                 }
             } else {
-                _bulletTerrainHit.transform.position = hit.point;
+                _turretTerrainHit.transform.position = hit.point;
                 StartCoroutine(TerrainHitCoroutine());
             }
         }
@@ -123,10 +118,10 @@ public class Turret : MonoBehaviour {
 
     IEnumerator TerrainHitCoroutine() {
         float time = Random.Range(_minHitEffectDur, _maxHitEffectDur);
-        _bulletTerrainHit.SetActive(true);
+        _turretTerrainHit.SetActive(true);
 
         yield return new WaitForSeconds(time);
-        _bulletTerrainHit.SetActive(false);
+        _turretTerrainHit.SetActive(false);
     }
 
     IEnumerator FlashLineRendererCoroutine(float onTime, float offTime, int num) {

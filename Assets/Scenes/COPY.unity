@@ -9117,7 +9117,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh108174
+  m_Name: pb_Mesh21082
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9626,6 +9626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 2211216444059321641, guid: 3b8c651f2fee4314f88386e771c56bc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2211216444059321643, guid: 3b8c651f2fee4314f88386e771c56bc1,
         type: 3}
@@ -15361,6 +15366,11 @@ PrefabInstance:
       objectReference: {fileID: 1551775580}
     - target: {fileID: 1375470096449639131, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
         type: 3}
+      propertyPath: _maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1375470096449639131, guid: 51e0fe297d9eb0948af7b3ca9db9f728,
+        type: 3}
       propertyPath: _cinemachineCamera
       value: 
       objectReference: {fileID: 1547504566}
@@ -15416,7 +15426,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: _blobBehaviorArray.Array.data[0]._speed
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642489, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -15546,7 +15556,7 @@ PrefabInstance:
     - target: {fileID: 4311795739205642493, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 14.86
+      value: 11.66
       objectReference: {fileID: 0}
     - target: {fileID: 4311795739205642493, guid: 9602833b82b08b447a17f075f454a6d3,
         type: 3}
@@ -15697,6 +15707,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TargetArea
       objectReference: {fileID: 0}
+    - target: {fileID: 6837699859484920838, guid: 927a1b33135367042b45e61a2183b89e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837699859484920838, guid: 927a1b33135367042b45e61a2183b89e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6837699859484920890, guid: 927a1b33135367042b45e61a2183b89e,
         type: 3}
       propertyPath: m_RootOrder
@@ -15704,8 +15724,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6837699859484920890, guid: 927a1b33135367042b45e61a2183b89e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 30.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837699859484920890, guid: 927a1b33135367042b45e61a2183b89e,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.01
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 6837699859484920890, guid: 927a1b33135367042b45e61a2183b89e,
         type: 3}
