@@ -10397,6 +10397,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b8c651f2fee4314f88386e771c56bc1, type: 3}
+--- !u!1 &1387455960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2211216444059321641, guid: 3b8c651f2fee4314f88386e771c56bc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1387455959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1387455961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387455960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d74b65e5bf721479d5762304658d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireRate: 1
+  _damage: 1
+  _spread: 0.5
+  _targetArea: {fileID: 0}
+  _bulletTerrainHit: {fileID: 4331324054051814625, guid: b5d27caa31d44474fab57d3b1263d68c,
+    type: 3}
+  _audioArray: []
 --- !u!43 &1395472976
 Mesh:
   m_ObjectHideFlags: 0
