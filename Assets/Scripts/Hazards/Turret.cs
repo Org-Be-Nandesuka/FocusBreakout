@@ -26,6 +26,8 @@ public class Turret : MonoBehaviour {
     private Blob _target;
     private LineRenderer _lineRenderer;
     private ParticleSystem _muzzleFlash;
+    private AudioSource _audioSource;
+    private AudioClip _audioClip;
     private float _nextTimeToFire;
 
     void Start() {
@@ -33,6 +35,8 @@ public class Turret : MonoBehaviour {
         _lineRenderer.enabled = true;
 
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioClip = AudioManager.Instance.GetAudioClip("BulletTerrainHit");
         _nextTimeToFire = 0f;
 
         _turretTerrainHit = Instantiate(_turretTerrainHit, transform);
@@ -90,6 +94,7 @@ public class Turret : MonoBehaviour {
 
         _nextTimeToFire = Time.time + _fireRate;
         _muzzleFlash.Play();
+        _audioSource.Play();
 
         if (Physics.Raycast(transform.position, targetDirection, out hit, _maxDistance)) {
             _lineRenderer.SetPosition(1, hit.point);
@@ -101,6 +106,7 @@ public class Turret : MonoBehaviour {
             } else {
                 _turretTerrainHit.transform.position = hit.point;
                 StartCoroutine(TerrainHitCoroutine());
+                AudioSource.PlayClipAtPoint(_audioClip, hit.point, 0.1f);
             }
         }
     }

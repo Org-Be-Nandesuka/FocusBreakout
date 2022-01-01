@@ -29,33 +29,37 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void Play(string name) {
-        Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
-
-        if (audio == null) {
-            throw new ArgumentException("Could not find Audio with name \"" + name + "\"");
-        }
-        audio.Source.Play();
+        FindAudio(name).Source.Play();
     }
 
     public void PlayDelayed(string name, float delay) {
-        Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
-
-        if (audio == null) {
-            throw new ArgumentException("Could not find Audio with name \"" + name + "\"");
-        } else if (delay < 0) {
+        if (delay < 0) {
             throw new ArgumentException("Param delay in PlayDelayed() cannot be negative");
         }
 
-        audio.Source.PlayDelayed(delay);
+        FindAudio(name).Source.PlayDelayed(delay);
     }
 
     public void Stop(string name) {
+        FindAudio(name).Source.Stop();
+    }
+
+    public void Pause(string name) {
+        FindAudio(name).Source.Pause();
+    }
+
+    public AudioClip GetAudioClip(string name) {
+        return FindAudio(name).Source.clip;
+    }
+
+    private Audio FindAudio(string name) {
         Audio audio = Array.Find(_audioArray, audio => audio.Name == name);
 
         if (audio == null) {
             throw new ArgumentException("Could not find Audio with name \"" + name + "\"");
         }
-        audio.Source.Stop();
+
+        return audio;
     }
 
     public static AudioManager Instance {
@@ -75,8 +79,8 @@ public class AudioManager : MonoBehaviour {
 
             // else create new one
             _instance = new GameObject(nameof(AudioManager), typeof(AudioManager)).AddComponent<AudioManager>();
-            GameObject g = new GameObject();
-            g.AddComponent<AudioManager>();
+            GameObject gameObject = new GameObject();
+            gameObject.AddComponent<AudioManager>();
             return _instance;
         }
     }

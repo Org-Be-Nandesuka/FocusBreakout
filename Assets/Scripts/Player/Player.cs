@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 public class Player : Blob {
     [SerializeField] private float _speed;
@@ -12,14 +12,11 @@ public class Player : Blob {
     [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; 
     [SerializeField] private GameObject _bulletHitPrefab;
 
-    // _hitEffectDur - _hitEffectDurRange should not be negative
-    // the resulting float may be used in WaitForSeconds()
-    private const float _hitEffectDur = 0.2f;
-    private const float _hitEffectDurRange = 0.05f;
+    private const float _minHitEffectDur = 0.15f;
+    private const float _maxHitEffectDur = 0.25f;
     private Renderer _renderer;
     private GameObject _bulletHit;
     private int _damageTaken;
-
 
     void Awake() {
         _renderer = GetComponent<Renderer>();
@@ -34,6 +31,7 @@ public class Player : Blob {
     public override void TakeDamage(int dmg) {
         _damageTaken += dmg;
         StartCoroutine(BulletHitCoroutine());
+        AudioManager.Instance.Play("BulletBlobHit");
         base.TakeDamage(dmg);
         _healthBar.SetHealth(CurrentHealth);
     }
@@ -52,8 +50,7 @@ public class Player : Blob {
     // VFX when player is hit.
     IEnumerator BulletHitCoroutine() {
         Renderer[] rendererArray = gameObject.GetComponentsInChildren<Renderer>();
-        float time = UnityEngine.Random.Range(_hitEffectDur - _hitEffectDurRange,
-            _hitEffectDur + _hitEffectDurRange);
+        float time = UnityEngine.Random.Range(_minHitEffectDur, _maxHitEffectDur);
 
         foreach (Renderer r in rendererArray) {
             r.enabled = false;
@@ -86,7 +83,7 @@ public class Player : Blob {
     public float Speed {
         get { return _speed; }
         set {
-            if (value < 0) {
+            if (value <= 0) {
                 throw new ArgumentException("Speed must be at least 0.");
             } else {
                 _speed = value;
