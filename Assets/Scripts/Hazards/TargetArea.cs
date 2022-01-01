@@ -29,14 +29,6 @@ public class TargetArea : MonoBehaviour {
         _layerMask = LayerMask.GetMask("Target");
     }
 
-/*    void FixedUpdate() {
-        // BoxCastAll's size parameter uses halfExtents for some reason, 
-        // therefore our input size is divided by 2.
-        _hitArray = Physics.BoxCastAll(transform.position, _halfScale, transform.forward,
-            transform.rotation, 0, _layerMask);
-    }*/
-
-
     public Blob GetRandomBlob() {
         // BoxCastAll's size parameter uses halfExtents for some reason, 
         // therefore our input size is divided by 2.
