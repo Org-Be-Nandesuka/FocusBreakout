@@ -1,14 +1,16 @@
-using Cinemachine;
+using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Player : Blob {
+    [SerializeField] private float _speed;
     [SerializeField] private float _cameraShakeStrength; 
-    [SerializeField] private float _cameraShakeFrequency; 
-    [SerializeField] private HealthBar _healthBar; // UI representation of player's health
-    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; // Cinemachine camera following player
-    [SerializeField] private GameObject _bulletHitPrefab; // particle effect when hit by bullet
+    [SerializeField] private float _cameraShakeFrequency;
+    [SerializeField] private HealthBar _healthBar; 
+    [SerializeField] private CinemachineVirtualCamera _cinemachineCamera; 
+    [SerializeField] private GameObject _bulletHitPrefab;
 
     // _hitEffectDur - _hitEffectDurRange should not be negative
     // the resulting float may be used in WaitForSeconds()
@@ -18,7 +20,8 @@ public class Player : Blob {
     private GameObject _bulletHit;
     private int _damageTaken;
 
-    void Start() {
+
+    void Awake() {
         _renderer = GetComponent<Renderer>();
         _healthBar.SetMaxHealth(MaxHealth);
         _damageTaken = 0;
@@ -29,9 +32,9 @@ public class Player : Blob {
     }
 
     public override void TakeDamage(int dmg) {
-        base.TakeDamage(dmg);
         _damageTaken += dmg;
         StartCoroutine(BulletHitCoroutine());
+        base.TakeDamage(dmg);
         _healthBar.SetHealth(CurrentHealth);
     }
 
@@ -49,7 +52,8 @@ public class Player : Blob {
     // VFX when player is hit.
     IEnumerator BulletHitCoroutine() {
         Renderer[] rendererArray = gameObject.GetComponentsInChildren<Renderer>();
-        float time = Random.Range(_hitEffectDur - _hitEffectDurRange, _hitEffectDur + _hitEffectDurRange);
+        float time = UnityEngine.Random.Range(_hitEffectDur - _hitEffectDurRange,
+            _hitEffectDur + _hitEffectDurRange);
 
         foreach (Renderer r in rendererArray) {
             r.enabled = false;
@@ -79,8 +83,23 @@ public class Player : Blob {
         get { return _damageTaken; }
     }
 
+    public float Speed {
+        get { return _speed; }
+        set {
+            if (value < 0) {
+                throw new ArgumentException("Speed must be at least 0.");
+            } else {
+                _speed = value;
+            }
+        }
+    }
+
     protected override void OnValidate() {
         base.OnValidate();
+        if (_speed < 0) {
+            _speed = 0;
+        }
+
         if (_cameraShakeStrength < 0) {
             _cameraShakeStrength = 0;
         }

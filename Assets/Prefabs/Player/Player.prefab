@@ -289,19 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31515e3d9e52f5142b6e2716d085ca22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
+  _maxHealth: 10
   _speed: 10
-  _audioArray:
-  - _name: Wilhelm
-    _clip: {fileID: 8300000, guid: fcd01f0e6e8562e478028ce648e3a887, type: 3}
-    _audioMixerGroup: {fileID: 0}
-    _volume: 0.5
-    _loop: 0
-  - _name: Hit
-    _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
-    _audioMixerGroup: {fileID: 0}
-    _volume: 1
-    _loop: 0
   _cameraShakeStrength: 5
   _cameraShakeFrequency: 3
   _healthBar: {fileID: 716727942162161832, guid: d3a8a83932986e443af2b7b32d2cf940,
