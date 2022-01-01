@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 public class Player : Blob {
     [SerializeField] private float _speed;
