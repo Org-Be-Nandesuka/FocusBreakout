@@ -10,7 +10,11 @@ using Random = UnityEngine.Random;
 /// Only exception is if the Blob's scale is larger than that of the cube on any of the axes.
 /// 
 /// <para>
-/// Blob Spawner's scale cannot be negative and its roation must be (0, 0, 0).
+/// Blob Spawner's scale cannot be negative and its rotation must be (0, 0, 0).
+/// </para>
+/// 
+/// <para>
+/// (Blob's Lifespan) / (Spawn Rate) should be at least Max Blobs.
 /// </para>
 /// 
 /// <para>
@@ -20,7 +24,6 @@ using Random = UnityEngine.Random;
 public class BlobSpawner : MonoBehaviour {
     [SerializeField] private BasicBlob _blob;
     [SerializeField] private int _maxBlobs;
-    [Tooltip("(Blob's Lifespan) / (Spawn Rate) should be at least Max Blobs")]
     [SerializeField] private float _spawnRate;
     [SerializeField] private BlobBehavior[] _blobBehaviorArray;
 

@@ -10,7 +10,7 @@ public abstract class Blob : MonoBehaviour {
 
     private int _currentHealth;
 
-    private void Start() {
+    private void Awake() {
         _currentHealth = _maxHealth;
     }
 

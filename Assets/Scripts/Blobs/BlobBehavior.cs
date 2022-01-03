@@ -13,11 +13,11 @@ public class BlobBehavior : ISerializationCallbackReceiver {
     [SerializeField] private float _speed; 
     // Time until they flip their movement direction, 0 = only change direction from collisions.
     [SerializeField] private float _directionChangeTime;
-    // (0, 0, 0) = no movement
+    // (0, 0, 0) = no movement.
     [SerializeField] private Vector3 _moveDirection;
     // Overrides Facing Direction and will face the direction they are moving in.
     [SerializeField] private bool _faceMoveDirection;
-    // (0, 0, 0) will be changed to (0, 0, 1)
+    // (0, 0, 0) will be changed to (0, 0, 1).
     [SerializeField] private Vector3 _facingDirection;
 
     // min/max values for normalized Vector
