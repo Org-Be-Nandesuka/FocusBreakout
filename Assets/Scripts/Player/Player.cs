@@ -84,7 +84,7 @@ public class Player : Blob {
         get { return _speed; }
         set {
             if (value <= 0) {
-                throw new ArgumentException("Speed must be at least 0.");
+                throw new ArgumentException("Speed must be positive.");
             } else {
                 _speed = value;
             }
