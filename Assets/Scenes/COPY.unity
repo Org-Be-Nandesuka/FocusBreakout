@@ -12438,6 +12438,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8118520732686741612, guid: bc93074cfee844b43974088fe71ec1b5,
+        type: 3}
+      propertyPath: _audioArray.Array.data[9]._rolloff
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118520732686741612, guid: bc93074cfee844b43974088fe71ec1b5,
+        type: 3}
+      propertyPath: _audioArray.Array.data[9]._maxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118520732686741612, guid: bc93074cfee844b43974088fe71ec1b5,
+        type: 3}
+      propertyPath: _audioArray.Array.data[9]._spatialBlend
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8118520732686741613, guid: bc93074cfee844b43974088fe71ec1b5,
         type: 3}
       propertyPath: m_Name
