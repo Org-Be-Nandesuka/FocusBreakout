@@ -13,15 +13,17 @@ public class Turret : MonoBehaviour {
     [SerializeField] private float _spread;
     [SerializeField] private TargetArea _targetArea;
     [SerializeField] private GameObject _turretTerrainHit;
-
+    
+    // Effect when Turret misses
     private const float _minHitEffectDur = 0.05f;
     private const float _maxHitEffectDur = 0.15f;
-    private const float _maxDistance = Constants.MaxMapDistance;
 
-    // LineRenderer 'Flashing' Stats
-    private const float _onTime = 0.02f;
-    private const float _offTime = 0.04f;
-    private const int _interations = 3;
+    // Effect when Turret shoots
+    private const float _lineRendererTime = 0.01f;
+    private const float _minLineDisFromObj = 5;
+    private const float _maxLineDisFromObj = 10;
+
+    private const float _maxDistance = Constants.MaxMapDistance;
 
     private Blob _target;
     private LineRenderer _lineRenderer;
@@ -32,7 +34,8 @@ public class Turret : MonoBehaviour {
 
     void Start() {
         _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.enabled = true;
+        _lineRenderer.SetPosition(0, transform.position);
+        _lineRenderer.enabled = false;
 
         _muzzleFlash = transform.Find("MuzzleFlash").GetComponent<ParticleSystem>();
         _audioSource = GetComponent<AudioSource>();
@@ -44,7 +47,6 @@ public class Turret : MonoBehaviour {
     }
 
     void Update() {
-        _lineRenderer.SetPosition(0, transform.position);
         TargetBlob();
     }
 
@@ -97,7 +99,8 @@ public class Turret : MonoBehaviour {
         _audioSource.Play();
 
         if (Physics.Raycast(transform.position, targetDirection, out hit, _maxDistance)) {
-            _lineRenderer.SetPosition(1, hit.point);
+            StartCoroutine(FlashLineRendererCoroutine(_lineRendererTime, hit.point));
+
             if (hit.collider.CompareTag("Blob")) {
                 _target.TakeDamage(_damage);
                 if (!_target.gameObject.activeSelf) {
@@ -106,7 +109,7 @@ public class Turret : MonoBehaviour {
             } else {
                 _turretTerrainHit.transform.position = hit.point;
                 StartCoroutine(TerrainHitCoroutine());
-                AudioSource.PlayClipAtPoint(_audioClip, hit.point, 0.1f);
+                AudioSource.PlayClipAtPoint(_audioClip, hit.point, 0.25f);
             }
         }
     }
@@ -130,13 +133,13 @@ public class Turret : MonoBehaviour {
         _turretTerrainHit.SetActive(false);
     }
 
-    IEnumerator FlashLineRendererCoroutine(float onTime, float offTime, int num) {
-        for (int i = 0; i < num; i++) {
-            _lineRenderer.enabled = true;
-            yield return new WaitForSeconds(onTime);
-            _lineRenderer.enabled = false;
-            yield return new WaitForSeconds(offTime);
-        }
+    IEnumerator FlashLineRendererCoroutine(float time, Vector3 dir) {
+        float length = Vector3.Distance(transform.position, dir);
+        _lineRenderer.enabled = true;
+        //_lineRenderer.SetPosition(0, transform.position + dir.normalized * (length - 1));
+        _lineRenderer.SetPosition(1, dir);
+        yield return new WaitForSeconds(time);
+        _lineRenderer.enabled = false;
     }
 
     private void OnValidate() {
