@@ -69,7 +69,7 @@ public class Turret : MonoBehaviour {
 
         targetDirection = GetTargetDirection(_target);
 
-        // Check if it's "visible" by the shooter
+        // Check if it's "visible" by the turret
         if (Physics.Raycast(transform.position, targetDirection, out hit, _maxDistance)) {
             // Follow blob until it is no longer "visible"
             if (hit.collider.CompareTag("Blob")) {
@@ -136,8 +136,7 @@ public class Turret : MonoBehaviour {
     IEnumerator FlashLineRendererCoroutine(float time, Vector3 dir) {
         float length = Vector3.Distance(transform.position, dir);
         _lineRenderer.enabled = true;
-        //_lineRenderer.SetPosition(0, transform.position + dir.normalized * (length - 1));
-        _lineRenderer.SetPosition(1, dir);
+        _lineRenderer.SetPosition(1, dir.normalized * (length + 1));
         yield return new WaitForSeconds(time);
         _lineRenderer.enabled = false;
     }
