@@ -44,6 +44,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows
+          dockerImage: unityci/editor:windows-2021.1.0f1-windows-il2cpp-2.0.0
 
       # Output
       - uses: actions/upload-artifact@v3.1.3
