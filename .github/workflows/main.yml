@@ -1,5 +1,5 @@
 # .github/workflows/main.yml
-name: Build Game
+name: Build Unity Game
 
 on:
   pull_request:
@@ -7,28 +7,26 @@ on:
      — opened
     branches:
      — develop
-    paths:
-     — 'Assets/**'
-     — 'Packages/**'
-     — 'ProjectSettings/**'
+    # Commented for now, update this workflow to only trigger the buildnig step when files
+    # in below folders are updated. This can be done by doing a git diff and grep within
+    # this workflow.
+    # paths:
+    #  — 'Assets/**'
+    #  — 'Packages/**'
+    #  — 'ProjectSettings/**'
   workflow_dispatch:
-    inputs:
-      workflow_mode:
-        description: '[release] [StandaloneWindows64]'
-        required: false
-        default: ''
+
 jobs:
-# Job #1
   buildWithWindows:
-    name: Build for Windows
-    runs-on: windows-latest
+    name: Build for WindowsOS
+    runs-on: ubuntu-latest # using windows-latest causes an issue with the docker image that unityci uses
     steps:
       # Checkout
       - name: Checkout repository
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
 
       # Cache
-      - uses: actions/cache@v3.3.2
+      - uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -36,7 +34,7 @@ jobs:
             Library-
 
       # Build
-      - name: Build project
+      - name: Build Unity project
         uses: game-ci/unity-builder@v3.1.0
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -46,7 +44,8 @@ jobs:
           targetPlatform: StandaloneWindows
 
       # Output
-      - uses: actions/upload-artifact@v3.1.3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: Build
+          name: FocusBreakout-build-dev
           path: build
