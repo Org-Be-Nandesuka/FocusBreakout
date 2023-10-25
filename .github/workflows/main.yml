@@ -5,8 +5,8 @@ on:
   pull_request:
     types:
      — opened
-    branches:
-     — develop
+    # branches:
+    #  — develop
     # Commented for now, update this workflow to only trigger the buildnig step when files
     # in below folders are updated. This can be done by doing a git diff and grep within
     # this workflow.
