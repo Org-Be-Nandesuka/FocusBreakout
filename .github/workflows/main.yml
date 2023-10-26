@@ -3,8 +3,8 @@ name: Build Unity Game
 
 on:
   pull_request:
-    types:
-     — opened
+    # types:
+    #  — opened
     # branches:
     #  — develop
     # Commented for now, update this workflow to only trigger the buildnig step when files
