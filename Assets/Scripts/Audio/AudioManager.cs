@@ -4,6 +4,7 @@ using UnityEngine;
 // THIS WORKS AND IDK HOW PLS HALP
 public class AudioManager : MonoBehaviour {
     [SerializeField] private Audio[] _audioArray;
+    [SerializeField] private float masterVolume;
 
     private static AudioManager _instance;
 
