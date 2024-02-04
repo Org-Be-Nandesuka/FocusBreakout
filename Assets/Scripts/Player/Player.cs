@@ -118,6 +118,14 @@ public class Player : Blob {
     private void CameraShake(float intensity, float frequency) {
         CinemachineBasicMultiChannelPerlin cinemachineBMCP = 
             _cinemachineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        // can prob get rid of this once transition to new blob/turret is done
+        if (cinemachineBMCP == null) {
+            throw new NullReferenceException("Make sure PlayerCamera -> CinemachineVirtualCamera" +
+                " -> Noise is set to 'Basic Multi Channel Perlin'. Check PlayerCamera prefab for" +
+                "default values.");
+        }
+
         cinemachineBMCP.m_AmplitudeGain = intensity;
         cinemachineBMCP.m_FrequencyGain = frequency;
     }

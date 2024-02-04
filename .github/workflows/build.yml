@@ -4,7 +4,7 @@ name: Build Unity Game
 
 on:
   pull_request:
-    # Commented for now, update this workflow to only trigger the buildnig step when files
+    # Commented for now, update this workflow to only trigger the building step when files
     # in below folders are updated. This can be done by doing a git diff and grep within
     # this workflow.
     # paths:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
 
       # Cache
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -32,7 +32,7 @@ jobs:
 
       # Build
       - name: Build Unity project
-        uses: game-ci/unity-builder@v3.1.0
+        uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -42,7 +42,7 @@ jobs:
 
       # Output
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: FocusBreakout-build-dev
           path: build
