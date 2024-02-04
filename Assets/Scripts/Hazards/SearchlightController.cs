@@ -11,7 +11,7 @@ using UnityEngine.AI;
 /// </para>
 /// </summary>
 public class SearchlightController : MonoBehaviour {
-    // The child Spolight object.
+    // The child Spotlight object.
     [SerializeField] private Transform _searchlight;
 
     // List of positions along the Searchlight's patrol path
@@ -23,12 +23,14 @@ public class SearchlightController : MonoBehaviour {
     private NavMeshAgent _agent;    // Agent that controls the Searchlight's movement
     private DamagePerSeconds _dps;  // Responsible for dealing damage to player when detected
     private int _destinationPoint;  // Destination represented as the corresponding index in _path
+    private Light _lightEmitter;    // Light component attached to the searchlight object
     private bool _isDelayed;
 
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
         _dps = GetComponent<DamagePerSeconds>();
         _destinationPoint = 0;  // Set destination to first point in the _path
+        _lightEmitter = _searchlight.GetComponent<Light>();
         ValidatePath();
     }
 
@@ -51,10 +53,11 @@ public class SearchlightController : MonoBehaviour {
         // Cast SphereCast relative to _searchlight's position
         Vector3 origin = _searchlight.position;
         Vector3 dir = _searchlight.forward;
-        float radius = 5f;
 
         // Match length of ray to dist. of light from floor
-        float castLen = Math.Abs(_searchlight.position.z);
+        float castLen = Math.Abs(_lightEmitter.range);
+        // Calculate radius of circular light on floor (bottom of spot light's cone)
+        float radius = (Mathf.Tan(_lightEmitter.spotAngle * Mathf.Deg2Rad) * castLen) - 1f;
         RaycastHit hit;
 
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
