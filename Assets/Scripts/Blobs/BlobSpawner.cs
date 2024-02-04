@@ -171,4 +171,11 @@ public class BlobSpawner : MonoBehaviour {
             _spawnRate = 0;
         }
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+    }
 }
