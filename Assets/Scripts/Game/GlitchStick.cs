@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(GlitchStick))]
@@ -48,10 +49,17 @@ public class GlitchStick : MonoBehaviour {
 
     private Material _material;
 
+    // TESTING STUFF
+    private float _height;
+    private bool _goingUp;
+
     void Start() {
         if (transform.parent == null) {
             throw new ArgumentException("GlitchStick needs to have a parent.");
         }
+
+        _height = -0.5f;
+        _goingUp = true;
 
         _material = GetComponent<Renderer>().material;
         Color color = _material.color;
@@ -92,6 +100,33 @@ public class GlitchStick : MonoBehaviour {
                 case ShapeEnum.SphereSurface:
                     radius = GetRandomFloat(_maxTeleportRadius, _maxTeleportRadius, false);
                     transform.localPosition = Random.onUnitSphere * radius;
+                    break;
+                case ShapeEnum.Test:
+                    float yValue = Random.Range(-0.5f, _height);
+                    
+                    float spread = Mathf.Abs(yValue) - 0.6f; // -0.5 for bottom of 0.5 radius sphere
+                    
+                    Vector2 v2 = Random.insideUnitCircle * spread;
+
+                    Vector3 v3 = new Vector3(v2.x, yValue, v2.y);
+                    time = _minTeleportTime;
+
+                    transform.localPosition = v3;
+
+                    if (_goingUp) {
+                        _height += 0.05f;
+
+                        if (_height >= 0.5) {
+                            _goingUp = false;
+                        }
+                    } else {
+                        _height -= 0.05f;
+
+                        if (_height <= -0.5) {
+                            _goingUp = true;
+                        }
+                    }
+                    
                     break;
                 default:
                     throw new ArgumentException("Enum \"" + _shape + "\" is not recognized.");
@@ -176,6 +211,7 @@ public class GlitchStick : MonoBehaviour {
     private enum ShapeEnum {
         Cube,
         Sphere,
-        SphereSurface
+        SphereSurface,
+        Test
     }
 }
