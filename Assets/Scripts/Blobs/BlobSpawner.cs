@@ -32,6 +32,7 @@ public class BlobSpawner : MonoBehaviour {
     private ObjectPool<BasicBlob> _blobPool;
 
     void Start() {
+        Debug.Log(Application.persistentDataPath);
         CheckTransform();
         if (_blobBehaviorArray.Length == 0) {
             throw new ArgumentException("Blob Behavior Array cannot be empty.");
