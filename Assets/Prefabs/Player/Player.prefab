@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 1375470096449639124}
   - component: {fileID: 1375470096449639131}
   - component: {fileID: 1375470096449639130}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Blob
   m_Icon: {fileID: 0}
