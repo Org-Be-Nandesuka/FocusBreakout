@@ -32,6 +32,7 @@ Shader "LowPolyWater/WaterShaded" {
             #include "UnityLightingCommon.cginc"
 
             sampler2D _ShoreTex;
+			sampler2D_float _CameraDepthTexture;
             float4 _BaseColor;  
             float _Shininess; 
             float4 _InvFadeParemeter;
@@ -141,12 +142,12 @@ Shader "LowPolyWater/WaterShaded" {
             half4 frag(v2f i) : SV_Target {
                 half4 edgeBlendFactors = half4(1.0, 0.0, 0.0, 0.0);
 
-                // #ifdef WATER_EDGEBLEND_ON
-                //     half depth = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos));
-                //     depth = LinearEyeDepth(depth);
-                //     edgeBlendFactors = saturate(_InvFadeParemeter * (depth - i.screenPos.w));
-                //     edgeBlendFactors.y = 1.0 - edgeBlendFactors.y;
-                // #endif
+                #ifdef WATER_EDGEBLEND_ON
+                    half depth = SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos));
+                    depth = LinearEyeDepth(depth);
+                    edgeBlendFactors = saturate(_InvFadeParemeter * (depth - i.screenPos.w));
+                    edgeBlendFactors.y = 1.0 - edgeBlendFactors.y;
+                #endif
 
                 half4 baseColor = calculateBaseColor(i);
 
