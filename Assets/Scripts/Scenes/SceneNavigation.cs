@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneNavigation : MonoBehaviour {
+
+    [SerializeField] GameObject popUpCanvas;
     // Play button
     public void LoadHighestLevel() {
         LoadLevel(SaveManager.GetMainLevelsCompleted());
@@ -34,16 +36,29 @@ public class SceneNavigation : MonoBehaviour {
     // Give a warning before starting a New Game
     public void WarningNewGame()
     {
-        LoadLevel(0);
-        Debug.Log("TEST");
-        Debug.Log(Application.persistentDataPath);
-        print(Application.persistentDataPath);
-
         // Check if save file exists
-        if (File.Exists(SaveManager._path)) {
-            
+        if (File.Exists(SaveManager._path))
+        {
             Debug.Log("Are you sure you want to start a new game?");
+            //GameObject popUpCanvas = GameObject.Find("PopUpCanvas");
+            popUpCanvas.SetActive(true);
+        } 
+        else {
+            LoadLevel(0);
         }
+    }
+
+    public void StartNewGame() {
+        // Delete save file
+        if (File.Exists(SaveManager._path)) { 
+            File.Delete(SaveManager._path);
+        }
+        popUpCanvas.SetActive(false);
+        LoadLevel(0);
+    }
+
+    public void DismissWarning() {
+        popUpCanvas.SetActive(false);
     }
 
     public void QuitGame() {

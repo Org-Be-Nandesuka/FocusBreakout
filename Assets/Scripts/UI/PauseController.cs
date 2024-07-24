@@ -42,6 +42,6 @@ public class PauseController : MonoBehaviour {
     public void MainMenu() {
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Confined;
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("MainMenu");
     }
 }

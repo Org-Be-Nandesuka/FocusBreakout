@@ -29,11 +29,11 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     // Disables Debug.Log because converting unicode decimal above 126 to char gives a
     // lot of log warnings that can be safely ignored. However, for debugging purposes
     // it is recommended to change the MaxUnicodeValue to 126 and EnableLogger to true.
-    [SerializeField] private bool _enableLogger = false;
+    //[SerializeField] private bool _enableLogger = true;
 
     // Using unicode decimal format
     private const int _minUnicodeValue = 33;
-    private const int _maxUnicodeValue = 420; // use 126 for no log warnings
+    private const int _maxUnicodeValue = 126; // use 126 for no log warnings
 
     private string _originalText;
     private string _targetText;
@@ -54,7 +54,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _stringBuilder = new StringBuilder(_originalText, originalLength);
         _initialRandCoroutineArray = new Coroutine[originalLength];
         _contRandCoroutineArray = new Coroutine[_charAmount];
-        Debug.unityLogger.logEnabled = _enableLogger;
+        //Debug.unityLogger.logEnabled = _enableLogger;
 
         TextChange(_originalText);
 
