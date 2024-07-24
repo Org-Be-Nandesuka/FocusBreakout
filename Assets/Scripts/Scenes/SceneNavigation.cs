@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,6 +29,21 @@ public class SceneNavigation : MonoBehaviour {
         StopAllCoroutines();
         Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene(name);
+    }
+
+    // Give a warning before starting a New Game
+    public void WarningNewGame()
+    {
+        LoadLevel(0);
+        Debug.Log("TEST");
+        Debug.Log(Application.persistentDataPath);
+        print(Application.persistentDataPath);
+
+        // Check if save file exists
+        if (File.Exists(SaveManager._path)) {
+            
+            Debug.Log("Are you sure you want to start a new game?");
+        }
     }
 
     public void QuitGame() {

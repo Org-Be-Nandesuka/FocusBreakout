@@ -37,6 +37,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private string _originalText;
     private string _targetText;
+    private float _originalCharacterSpacing;
     private TextMeshProUGUI _text;
     private StringBuilder _stringBuilder;
     private Coroutine _hoverCoroutine;
@@ -49,6 +50,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _text = GetComponent<TextMeshProUGUI>();
         _originalText = _text.text;
         originalLength = _text.text.Length;
+        _originalCharacterSpacing = _text.characterSpacing;
         _stringBuilder = new StringBuilder(_originalText, originalLength);
         _initialRandCoroutineArray = new Coroutine[originalLength];
         _contRandCoroutineArray = new Coroutine[_charAmount];
@@ -139,7 +141,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
             yield return new WaitForSeconds(_hoverEffectSpeed);
         }
 
-        _text.characterSpacing = 0;
+        _text.characterSpacing = _originalCharacterSpacing;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -148,7 +150,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerExit(PointerEventData eventData) {
         StopCoroutine(_hoverCoroutine);
-        _text.characterSpacing = 0;
+        _text.characterSpacing = _originalCharacterSpacing;
     }
 
     private void OnValidate() {
