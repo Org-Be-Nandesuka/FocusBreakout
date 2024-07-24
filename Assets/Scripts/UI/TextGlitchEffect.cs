@@ -43,7 +43,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Coroutine[] _initialRandCoroutineArray;
     private Coroutine[] _contRandCoroutineArray;
 
-    void Start() {
+    void OnEnable() {
         int originalLength;
 
         _text = GetComponent<TextMeshProUGUI>();
@@ -59,6 +59,11 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         for (int i = 0; i < _charAmount; i++) {
             _contRandCoroutineArray[i] = StartCoroutine(ContinuousRandCharCoroutine());
         }
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     // Randomly change a specific character in a string
