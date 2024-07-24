@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-3 {
+        stroke: #007ddf;
+        stroke-miterlimit: 10;
+        stroke-width: 6px;
+      }
+
+      .cls-3, .cls-2 {
+        fill: #007ddf;
+      }
+
+      .cls-4 {
+        fill: #fff;
+        font-family: GoswellDemoRegular, 'Goswell Demo';
+        font-size: 333.13px;
+      }
+    </style>
+  </defs>
+  <g id="BG">
+    <rect class="cls-1" width="2000" height="1000"/>
+  </g>
+  <g id="Main">
+    <text class="cls-4" transform="translate(125.34 667.91)"><tspan x="0" y="0">BREAKOUT</tspan></text>
+    <text class="cls-4" transform="translate(850.68 467.19)"><tspan x="0" y="0">CUS</tspan></text>
+    <g id="Target">
+      <circle id="Center" class="cls-2" cx="736.5" cy="389.24" r="13.01"/>
+      <g id="Arcs">
+        <path class="cls-3" d="M805.41,386.63h9.76c-1.14-35.12-25.27-64.41-57.84-73.32v10.16c27.12,8.58,46.98,33.47,48.08,63.16Z"/>
+        <path class="cls-3" d="M667.53,389.24c0-.87.03-1.74.07-2.6h-9.76c-.03.87-.07,1.73-.07,2.6,0,37.21,25.82,68.36,60.51,76.59v-10.07c-29.25-7.99-50.75-34.74-50.75-66.52Z"/>
+        <path class="cls-3" d="M736.5,320.27c.87,0,1.74.03,2.6.07v-9.76c-.87-.03-1.73-.07-2.6-.07-36.27,0-66.79,24.53-75.92,57.91h10.16c8.83-27.91,34.93-48.15,65.76-48.15Z"/>
+        <path class="cls-3" d="M736.5,458.2v9.76c38.13,0,69.93-27.11,77.17-63.11h-10c-7.08,30.56-34.45,53.35-67.17,53.35Z"/>
+      </g>
+      <rect id="Top-Rect" class="cls-2" x="728.69" y="287.74" width="14.31" height="36.44"/>
+      <rect id="Top-Rect-2" data-name="Top-Rect" class="cls-2" x="732.6" y="454.3" width="14.31" height="36.44"/>
+      <rect id="Top-Rect-3" data-name="Top-Rect" class="cls-2" x="813.93" y="365.16" width="14.31" height="36.44" transform="translate(437.71 1204.47) rotate(-90)"/>
+      <rect id="Top-Rect-4" data-name="Top-Rect" class="cls-2" x="646.06" y="371.67" width="14.31" height="36.44" transform="translate(263.33 1043.11) rotate(-90)"/>
+    </g>
+    <text class="cls-4" transform="translate(433.3 467.7)"><tspan x="0" y="0">F</tspan></text>
+  </g>
+</svg>
