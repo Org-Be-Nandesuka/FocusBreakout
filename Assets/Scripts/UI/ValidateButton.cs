@@ -3,8 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContinueButton : MonoBehaviour
+public class ValidateButton : MonoBehaviour
 {
+    [SerializeField] private string _originalText;
     void OnEnable()
     {
         Debug.Log(SaveManager._path);
@@ -17,7 +18,7 @@ public class ContinueButton : MonoBehaviour
         {
             this.gameObject.GetComponent<Button>().interactable = false;
             this.gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = "CONTINUE";
+            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = _originalText;
             this.gameObject.GetComponentInChildren<TextGlitchEffect>().enabled = false;
         }
     }
