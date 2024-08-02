@@ -1680,6 +1680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2041855974}
   - component: {fileID: 2041855973}
+  - component: {fileID: 2041855975}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -1703,7 +1704,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 70954da68154323458f7c18d70aa19e3, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 031053ebdffd2f045a9fa1ebf18c9fab, type: 2}
 --- !u!4 &2041855974
 Transform:
   m_ObjectHideFlags: 0
@@ -1712,12 +1713,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041855972}
   m_LocalRotation: {x: -9.313227e-10, y: -0, z: 4.6566134e-10, w: 1}
-  m_LocalPosition: {x: 27.8, y: 5.53, z: -10.1}
+  m_LocalPosition: {x: 0, y: 0.977, z: -10.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2041855975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041855972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!223 &1461077993796920292
 Canvas:
   m_ObjectHideFlags: 0
