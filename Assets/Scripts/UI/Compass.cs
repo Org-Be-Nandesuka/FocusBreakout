@@ -1,7 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 
-public class Compass : MonoBehaviour{
+public class Compass : MonoBehaviour {
 	[SerializeField] private RawImage _compassImage;
 	[SerializeField] private Transform _player; // Does not work with prefab
 

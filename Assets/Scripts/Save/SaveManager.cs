@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveManager {
-    private static readonly string _path = Application.persistentDataPath + "/player.gucci";
+    public static readonly string _path = Application.persistentDataPath + "/player.gucci";
 
     public static void SaveData(LevelData[] data) {
         BinaryFormatter formatter = new BinaryFormatter();

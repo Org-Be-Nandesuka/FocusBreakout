@@ -35,9 +35,9 @@ public class ExitLevel : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         
         if (DataManager.CurrentLevel == 3) {
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("Ending");
         } else {
-            SceneManager.LoadScene("GameWinScene"); //Switch to GameWinScene
+            SceneManager.LoadScene("GameWin"); //Switch to GameWinScene
         }
     }
 }
