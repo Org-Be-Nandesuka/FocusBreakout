@@ -1291,7 +1291,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Are you sure you want to start a new game?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bea28a0c829ae9a48a8df0446561cb1c, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -3793174977986598454, guid: bea28a0c829ae9a48a8df0446561cb1c,
     type: 2}
   m_fontSharedMaterials: []
@@ -2342,6 +2342,18 @@ PrefabInstance:
       propertyPath: m_text
       value: LEVELS
       objectReference: {fileID: 0}
+    - target: {fileID: 3505154088437034521, guid: 1c9585ed8361d844fbe1a7012080b6ab,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ebb3afad8d58de74db02a7fd5b0764cc,
+        type: 2}
+    - target: {fileID: 3505154088437034521, guid: 1c9585ed8361d844fbe1a7012080b6ab,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3793174977986598454, guid: ebb3afad8d58de74db02a7fd5b0764cc,
+        type: 2}
     - target: {fileID: 3505154089561740490, guid: 1c9585ed8361d844fbe1a7012080b6ab,
         type: 3}
       propertyPath: m_Name
@@ -4551,7 +4563,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: NO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bea28a0c829ae9a48a8df0446561cb1c, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -3793174977986598454, guid: bea28a0c829ae9a48a8df0446561cb1c,
     type: 2}
   m_fontSharedMaterials: []
@@ -5585,7 +5597,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: You will lose your current progress
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bea28a0c829ae9a48a8df0446561cb1c, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -3793174977986598454, guid: bea28a0c829ae9a48a8df0446561cb1c,
     type: 2}
   m_fontSharedMaterials: []
@@ -6507,7 +6519,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: YES
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bea28a0c829ae9a48a8df0446561cb1c, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -3793174977986598454, guid: bea28a0c829ae9a48a8df0446561cb1c,
     type: 2}
   m_fontSharedMaterials: []

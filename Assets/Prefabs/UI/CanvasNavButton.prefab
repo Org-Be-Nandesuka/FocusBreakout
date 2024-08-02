@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CanvasNavBut
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bea28a0c829ae9a48a8df0446561cb1c, type: 2}
-  m_sharedMaterial: {fileID: -3793174977986598454, guid: bea28a0c829ae9a48a8df0446561cb1c,
+  m_fontAsset: {fileID: 11400000, guid: ebb3afad8d58de74db02a7fd5b0764cc, type: 2}
+  m_sharedMaterial: {fileID: -3793174977986598454, guid: ebb3afad8d58de74db02a7fd5b0764cc,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -156,7 +156,6 @@ MonoBehaviour:
   _hoverEffectLength: 0.1
   _hoverEffectSpeed: 0.01
   _hoverEffectStrength: 200
-  _enableLogger: 0
 --- !u!1 &3505154089561740490
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,8 +334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e8ca62c11388e498265f98e85de2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  parent: {fileID: 0}
+  _parentCanvas: {fileID: 0}
+  _targetCanvas: {fileID: 0}
 --- !u!114 &-8999563474659574646
 MonoBehaviour:
   m_ObjectHideFlags: 0
