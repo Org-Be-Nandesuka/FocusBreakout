@@ -116,9 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Azonix SDF
   m_EditorClassIdentifier: 
-  hashCode: 1864054331
+  hashCode: 97544378
   material: {fileID: -3793174977986598454}
-  materialHashCode: -1415479493
+  materialHashCode: -1169490342
   m_Version: 1.1.0
   m_SourceFontFileGUID: 78af23d531bc36d4384b46aff2f8d49d
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 78af23d531bc36d4384b46aff2f8d49d,

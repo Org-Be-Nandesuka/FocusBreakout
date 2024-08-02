@@ -1,4 +1,5 @@
 using System.IO;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,17 +35,24 @@ public class SceneNavigation : MonoBehaviour {
     }
 
     // Give a warning before starting a New Game
-    public void WarningNewGame()
+    public void WarningNewGame(Animator dollyCartAnim)
     {
         // Check if save file exists
         if (File.Exists(SaveManager._path))
         {
-            Debug.Log("Are you sure you want to start a new game?");
             //GameObject popUpCanvas = GameObject.Find("PopUpCanvas");
             popUpCanvas.SetActive(true);
         } 
         else {
-            LoadLevel(0);
+            var parentName = transform.parent.parent.name;
+            var parentCanvas = GameObject.Find(parentName);
+            parentCanvas.SetActive(false);
+
+            // Play animation!
+            dollyCartAnim.SetTrigger("StartNewGame");
+            
+
+            // LoadLevel(0);
         }
     }
 
