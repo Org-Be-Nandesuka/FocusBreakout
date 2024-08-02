@@ -3,23 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ValidateButton : MonoBehaviour
-{
+public class ValidateButton : MonoBehaviour {
     [SerializeField] private string _originalText;
-    void OnEnable()
-    {
-        Debug.Log(SaveManager._path);
+
+    void OnEnable() {
         if(File.Exists(SaveManager._path)) { 
-            this.gameObject.GetComponent<Button>().interactable = true;
-            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            this.gameObject.GetComponentInChildren<TextGlitchEffect>().enabled = true;
-        }
-        else
-        {
-            this.gameObject.GetComponent<Button>().interactable = false;
-            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-            this.gameObject.GetComponentInChildren<TextMeshProUGUI>().text = _originalText;
-            this.gameObject.GetComponentInChildren<TextGlitchEffect>().enabled = false;
+            GetComponent<Button>().interactable = true;
+            GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            GetComponentInChildren<TextGlitchEffect>().enabled = true;
+        } else {
+            GetComponent<Button>().interactable = false;
+            GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+            GetComponentInChildren<TextMeshProUGUI>().text = _originalText;
+            GetComponentInChildren<TextGlitchEffect>().enabled = false;
         }
     }
 }

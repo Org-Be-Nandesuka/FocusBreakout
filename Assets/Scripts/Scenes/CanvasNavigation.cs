@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class CanvasNavigation : MonoBehaviour
 {
-    [SerializeField] private GameObject parentCanvas;
-    [SerializeField] private GameObject targetCanvas;
+    [SerializeField] private GameObject _parentCanvas;
+    [SerializeField] private GameObject _targetCanvas;
 
-    public void LoadCanvas()
-    {
-        targetCanvas.SetActive(true);
-        parentCanvas.SetActive(false);
+    public void LoadCanvas() {
+        _targetCanvas.SetActive(true);
+        _parentCanvas.SetActive(false);
     }
 }

@@ -38,31 +38,30 @@ public class SceneNavigation : MonoBehaviour {
     public void WarningNewGame(Animator dollyCartAnim)
     {
         // Check if save file exists
-        if (File.Exists(SaveManager._path))
-        {
-            //GameObject popUpCanvas = GameObject.Find("PopUpCanvas");
+        if (File.Exists(SaveManager._path)) {
             popUpCanvas.SetActive(true);
-        } 
-        else {
-            var parentName = transform.parent.parent.name;
-            var parentCanvas = GameObject.Find(parentName);
-            parentCanvas.SetActive(false);
+        } else {
+            // Disable main menu canvas
+            var mainMenuCanvas = GameObject.Find("MainMenuCanvas");
+            mainMenuCanvas.SetActive(false);
 
-            // Play animation!
-            dollyCartAnim.SetTrigger("StartNewGame");
-            
-
-            // LoadLevel(0);
+            dollyCartAnim.SetTrigger("StartNewGame"); // Play animation!
         }
     }
 
-    public void StartNewGame() {
+    public void StartNewGame(Animator dollyCartAnim) {
         // Delete save file
         if (File.Exists(SaveManager._path)) { 
             File.Delete(SaveManager._path);
         }
+
         popUpCanvas.SetActive(false);
-        LoadLevel(0);
+
+        // Disable main menu canvas
+        var mainMenuCanvas = GameObject.Find("MainMenuCanvas");
+        mainMenuCanvas.SetActive(false);
+
+        dollyCartAnim.SetTrigger("StartNewGame"); // Play animation!
     }
 
     public void DismissWarning() {
