@@ -171,11 +171,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6103979788358097993, guid: 96c7eee7d96d57e4cac57566231f7573,
         type: 3}
-      propertyPath: _stickAmount
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6103979788358097993, guid: 96c7eee7d96d57e4cac57566231f7573,
-        type: 3}
       propertyPath: _stickArray.Array.size
       value: 4
       objectReference: {fileID: 0}

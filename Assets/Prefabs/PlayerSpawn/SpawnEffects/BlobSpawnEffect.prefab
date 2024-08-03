@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: -1647170981974110273, guid: 5adf1f8a2010864469fb45f65e885a09,
         type: 3}
       propertyPath: _stickAmount
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -1647170981974110273, guid: 5adf1f8a2010864469fb45f65e885a09,
         type: 3}

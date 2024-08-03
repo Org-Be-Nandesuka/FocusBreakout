@@ -43,10 +43,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.5943396, g: 0.041708045, b: 0, a: 1}
-  m_Intensity: 20
+  m_Intensity: 1000
   m_Range: 30
   m_SpotAngle: 30
-  m_InnerSpotAngle: 1
+  m_InnerSpotAngle: 25
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 7488237920997141962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: 0, z: 43}
-  m_LocalScale: {x: 0.1, y: 1, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 1, z: 0.10000001}
   m_Children:
   - {fileID: 7488237919818328113}
   m_Father: {fileID: 0}
@@ -164,7 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _searchlight: {fileID: 7488237919818328113}
-  _path: []
+  _path:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _delay: 1
 --- !u!114 &5584248851659362723
 MonoBehaviour:
@@ -178,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5862a996cc7414dbf5782d4ff23ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 1
   _interval: 0.5
 --- !u!64 &7488237920997141966
 MeshCollider:
