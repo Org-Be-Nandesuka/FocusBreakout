@@ -1,13 +1,16 @@
-# Focus Breakout
+<p align="center">
+    <img src="./Assets/Textures/FocusBreakout_Title.png" alt="Illume" />
+</p>
 
+<p align="center">
+    <a href="https://unity.com/"><img src="https://img.shields.io/badge/Made%20with-Unity-57d357.svg?style=flat&logo=unity" /></a>
+    <img src="https://img.shields.io/badge/-v2021.1.17f1-57d357?style=flat" />
+    <img src="https://img.shields.io/badge/-csharp%208.0-7a5edf?style=flat" />
+    <a href="https://mbajaman.itch.io/focus-breakout"><img src="https://img.shields.io/badge/Published%20on-Itch-fa5c5c.svg?style=flat&logo=itch.io" /></a>
+</p>
+
+## Overview
 You are a sentient target blob trying to escape the confines of an aim trainer.
-
-# Technologies
-
-This project is created with:
-
-* Unity version: 2021.1.17f1
-* C# version: 8.0
 
 ## Unity Packages
 
@@ -16,6 +19,7 @@ This project is created with:
 * ProGrids
 * PostProcessing
 * Unity Particle Pack
+* Universal RP
 
 ## Compilation Instructions
 
@@ -89,8 +93,14 @@ https://www.youtube.com/watch?v=4UXYexpzGOE&ab_channel=Hegamurl
 Plexus and Plasma Effects:
 https://assetstore.unity.com/packages/vfx/shaders/ultimate-10-shaders-168611 
 
-Font:
+Anonymous Pro Font:
 https://www.marksimonson.com/fonts/view/anonymous-pro
+
+Azonix font:
+https://www.dafont.com/azonix.font
+
+Planet Jouse font (game logo):
+https://www.fontspace.com/planet-joust-font-f97528
 
 TextWriter:
 https://www.youtube.com/watch?v=ZVh4nH8Mayg 
@@ -113,6 +123,10 @@ https://www.soundsnap.com/rock_impact_colosseum_break_4_lo_wav
 
 Wall, Floor, Platform Textures:
 https://assetstore.unity.com/packages/2d/textures-materials/concrete/yughues-free-concrete-materials-12951 
+
+Furniture Asset Kit:
+https://www.kenney.nl/assets/furniture-kit
+
 
 
 # Known Issues
