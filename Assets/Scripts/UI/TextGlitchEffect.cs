@@ -54,7 +54,6 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
         _stringBuilder = new StringBuilder(_originalText, originalLength);
         _initialRandCoroutineArray = new Coroutine[originalLength];
         _contRandCoroutineArray = new Coroutine[_charAmount];
-        //Debug.unityLogger.logEnabled = _enableLogger;
 
         TextChange(_originalText);
 
