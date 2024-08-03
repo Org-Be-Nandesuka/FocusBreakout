@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameWinScoreManager : MonoBehaviour {
     [SerializeField] private bool _isCurrentScore;
 
-    private void Awake() {
+    public void UpdateText() {
         TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
         LevelData[] levelData = SaveManager.LoadData();
         float _highScore = levelData[DataManager.CurrentLevel].HighScore;

@@ -47,6 +47,12 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void OnEnable() {
         int originalLength;
 
+        // If object has GameWinScoreManager update the text on TMPGUI before glitch effect
+        if (TryGetComponent(out GameWinScoreManager gameWinScoreManager))
+        {
+            gameWinScoreManager.UpdateText();
+        }
+
         _text = GetComponent<TextMeshProUGUI>();
         _originalText = _text.text;
         originalLength = _text.text.Length;
