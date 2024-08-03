@@ -4456,8 +4456,8 @@ GameObject:
   - component: {fileID: 452318451}
   - component: {fileID: 452318454}
   - component: {fileID: 452318453}
-  - component: {fileID: 452318452}
   - component: {fileID: 452318455}
+  - component: {fileID: 452318452}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -4491,7 +4491,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452318450}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58c827abbaca1947960ad3eb2bb93a5, type: 3}
   m_Name: 
@@ -7958,8 +7958,8 @@ GameObject:
   - component: {fileID: 1697617446}
   - component: {fileID: 1697617449}
   - component: {fileID: 1697617448}
-  - component: {fileID: 1697617447}
   - component: {fileID: 1697617450}
+  - component: {fileID: 1697617447}
   m_Layer: 5
   m_Name: HighScore
   m_TagString: Untagged
@@ -7993,7 +7993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1697617445}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58c827abbaca1947960ad3eb2bb93a5, type: 3}
   m_Name: 
@@ -8698,8 +8698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shader: {fileID: -6465566751694194690, guid: 4924135713c512046bada1c198d9836c,
     type: 3}
-  _minEffectTime: 1
-  _minEffectInterval: 1
+  _minEffectTime: 0.25
+  _minEffectInterval: 3
   _intensity: 0.45
 --- !u!114 &5674411153019177103
 MonoBehaviour:
