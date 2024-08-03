@@ -5151,21 +5151,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4313844887141930252, guid: 69d9295ebff8b3641825b8e6eb34f005,
-        type: 3}
-      propertyPath: _intensity
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313844887141930252, guid: 69d9295ebff8b3641825b8e6eb34f005,
-        type: 3}
-      propertyPath: _minEffectTime
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313844887141930252, guid: 69d9295ebff8b3641825b8e6eb34f005,
-        type: 3}
-      propertyPath: _minEffectInterval
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4428243182901136607, guid: 69d9295ebff8b3641825b8e6eb34f005,
         type: 3}
       propertyPath: canvas
@@ -5251,8 +5236,7 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 35
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1461077994691511038, guid: 69d9295ebff8b3641825b8e6eb34f005, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d9295ebff8b3641825b8e6eb34f005, type: 3}
 --- !u!1001 &1221435547
 PrefabInstance:

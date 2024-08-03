@@ -287,13 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892452e98f4405f498ac6380139b87fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minEffectTime: 0.2
-  maxEffectTime: 3
-  minEffectInterval: 4
-  maxEffectInterval: 5
-  _intensity: 0.45
   _shader: {fileID: -6465566751694194690, guid: 4924135713c512046bada1c198d9836c,
     type: 3}
+  _minEffectTime: 0.25
+  _minEffectInterval: 3
+  _intensity: 0.45
 --- !u!1 &3001561940382314960
 GameObject:
   m_ObjectHideFlags: 0
