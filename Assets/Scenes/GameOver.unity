@@ -7399,7 +7399,7 @@ MonoBehaviour:
   _charAmount: 3
   _hoverEffectLength: 0.2
   _hoverEffectSpeed: 0.01
-  _hoverEffectStrength: 200
+  _hoverEffectStrength: 0
 --- !u!114 &1127258065
 MonoBehaviour:
   m_ObjectHideFlags: 0
