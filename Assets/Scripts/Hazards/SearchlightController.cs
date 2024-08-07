@@ -1,38 +1,42 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// Controls the movement and behaviour of an enemy Searchlight.
 /// 
 /// <para>
-/// Script should be attached to a GameObject with a NavMeshAgent component.
-/// This object should be parented to a "Spotlight" object that has its Z-axis pointed downwards.
+/// Script should be attached to a GameObject with NavMeshAgent and DamagePerInterval components.
 /// </para>
 /// </summary>
 public class SearchlightController : MonoBehaviour {
-    [SerializeField] private Transform _searchlight;    // The child Spolight object.
-    [SerializeField] private float _movementRange;
-    [SerializeField] private float _radius;
-    [SerializeField] private float _speed;
+    // The child Spotlight object.
+    [SerializeField] private Transform _searchlight;
 
-    [SerializeField] private int _damage = 1;
-    [SerializeField] private float _dmgInterval = 1f;
+    // List of positions along the Searchlight's patrol path
+    [SerializeField] private Transform[] _path;
 
-    private NavMeshAgent _agent;
-    private float _period;
+    // Number of seconds Searchlight waits at each point
+    [SerializeField] private float _delay = 1f;
 
-    // Start is called before the first frame update
+    private NavMeshAgent _agent;    // Agent that controls the Searchlight's movement
+    private DamagePerSeconds _dps;  // Responsible for dealing damage to player when detected
+    private int _destinationPoint;  // Destination represented as the corresponding index in _path
+    private Light _lightEmitter;    // Light component attached to the searchlight object
+    private bool _isDelayed;
+
     void Start() {
         _agent = GetComponent<NavMeshAgent>();
-        _period = _dmgInterval; // Ensure damage is done instantly the 1st time player is detected
+        _dps = GetComponent<DamagePerSeconds>();
+        _destinationPoint = 0;  // Set destination to first point in the _path
+        _lightEmitter = _searchlight.GetComponent<Light>();
+        ValidatePath();
     }
 
-    // Update is called once per frame
     void Update() {
-        if (!_agent.hasPath) {
-            MoveSearchlight();
+        if (!_agent.hasPath && !_isDelayed) {
+            StartCoroutine(MoveToNextPoint());
         }
     }
 
@@ -49,17 +53,22 @@ public class SearchlightController : MonoBehaviour {
         // Cast SphereCast relative to _searchlight's position
         Vector3 origin = _searchlight.position;
         Vector3 dir = _searchlight.forward;
-        float radius = 5f;
-        float castLen = Math.Abs(_searchlight.position.z);  // Match length of ray to dist. of light from floor
+
+        // Match length of ray to dist. of light from floor
+        float castLen = Math.Abs(_lightEmitter.range);
+        // Calculate radius of circular light on floor (bottom of spot light's cone)
+        float radius = (Mathf.Tan(_lightEmitter.spotAngle * Mathf.Deg2Rad) * castLen) - 1f;
         RaycastHit hit;
 
         if (Physics.SphereCast(origin, radius, dir, out hit, castLen)) {
             if (hit.collider.CompareTag("Blob")) {
                 FollowPlayer(hit.transform.position);
-                Attack(hit.transform.GetComponent<Player>());
+
+                if (!_dps.DealingDamage) {
+                    _dps.StartApplyingDamage(hit.transform.GetComponent<Player>());
+                }
             } else {
-                // Ensure next time player is detected they take immediate damage
-                _period = _dmgInterval;
+                _dps.StopApplyingDamage();
             }
         }
     }
@@ -69,66 +78,22 @@ public class SearchlightController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Do damage to the target at the specified interval.
+    /// Move the Searchlight to the next point in the _path array.
     /// </summary>
-    /// <param name="target"></param>
-    private void Attack(Player target) {
-        if (target == null) {
-            Debug.LogError($"The target {this.name} is trying to attack does not have the " +
-                $"Player.cs script attached or it is null");
-            return;
-        }
+    private IEnumerator MoveToNextPoint() {
+        _isDelayed = true;
+        yield return new WaitForSeconds(_delay);
+        _isDelayed = false;
 
-        if (_period > _dmgInterval) {
-            target.TakeDamage(_damage);
-            _period = 0f;
-        }
-        _period += Time.fixedDeltaTime;
+        _agent.SetDestination(_path[_destinationPoint].position);
+        // Set dest to next point in path, or cycle back to the start
+        _destinationPoint = (_destinationPoint + 1) % _path.Length;
     }
 
-    private bool RandomPoint(Vector3 centre, float range, out Vector3 result) {
-        for (int i = 0; i < 30; i++) {
-            Vector3 randomPoint = centre + Random.insideUnitSphere * range;
-            NavMeshHit hit;
-
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) {
-                result = hit.position;
-                return true;
-            }
-        }
-
-        result = Vector3.zero;
-
-        return false;
-    }
-
-    private Vector3 GetRandomPoint(Transform point = null, float radius = 0) {
-        Vector3 generatedPoint;
-        Vector3 centre = (point == null) ? transform.position : point.position;
-        float pointRange = (radius == 0) ? _movementRange : radius;
-
-        if (RandomPoint(centre, pointRange, out generatedPoint)) {
-            Debug.DrawRay(generatedPoint, Vector3.up, Color.black, 1);
-            return generatedPoint;
-        }
-
-        return (point == null) ? Vector3.zero : point.position;
-    }
-
-    private void MoveSearchlight() {
-        Vector3 newPosition = GetRandomPoint(transform, _radius);
-        // Update NavMeshAgent position on Search Area
-        _agent.SetDestination(newPosition);
-        // Ensure that the NavMeshAgent rotation doesn't affect spotlight position
-        if (_searchlight.rotation.eulerAngles.x != 90f) {
-            _searchlight.Rotate(90, 0, 0);
+    private void ValidatePath() {
+        if (this.enabled && _path.Length == 0) {
+            _path = new Transform[] { GetComponent<Transform>() };
+            throw new ArgumentException($"Path array in for {name} cannot be empty");
         }
     }
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position, _radius);
-    }
-#endif
-
 }

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour {
-    [SerializeField] private float _jumpHeight = 1f;
+    [SerializeField] private float _jumpHeight;
     [SerializeField] private GameObject _moveEffectPrefab; // particle effect when moving
 
     private CharacterController _controller;

@@ -1,0 +1,48 @@
+# .github/workflows/build.yml
+# Description: GitHub Action for creating a Windows OS Build
+name: Build Unity Game
+
+on:
+  pull_request:
+    # Commented for now, update this workflow to only trigger the building step when files
+    # in below folders are updated. This can be done by doing a git diff and grep within
+    # this workflow.
+    # paths:
+    #  — 'Assets/**'
+    #  — 'Packages/**'
+    #  — 'ProjectSettings/**'
+  workflow_dispatch:
+
+jobs:
+  buildWithWindows:
+    name: Build for Windows OS
+    runs-on: ubuntu-latest # using windows-latest causes an issue with the docker image that unityci uses
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Cache
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build Unity project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows
+
+      # Output
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: FocusBreakout-build-dev
+          path: build

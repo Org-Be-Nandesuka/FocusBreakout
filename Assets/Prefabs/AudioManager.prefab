@@ -98,3 +98,15 @@ MonoBehaviour:
       type: 2}
     _volume: 0.1
     _loop: 1
+  - _name: BulletTerrainHit
+    _clip: {fileID: 8300000, guid: 6a31e8871e22df14eb3a9515f20e3a45, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.25
+    _loop: 0
+  - _name: BulletBlobHit
+    _clip: {fileID: 8300000, guid: a71f235be31ba8b42853147f5e55dfee, type: 3}
+    _audioMixerGroup: {fileID: -2642978304827752791, guid: c6e70700de42194469ab0c5de5c259a5,
+      type: 2}
+    _volume: 0.25
+    _loop: 0

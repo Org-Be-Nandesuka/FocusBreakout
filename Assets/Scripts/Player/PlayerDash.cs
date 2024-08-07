@@ -29,8 +29,6 @@ public class PlayerDash : MonoBehaviour
     }
 
     IEnumerator Dash() {
-        Debug.Log("Dash dash!"); //Leaving this here for future tweaking/balancing
-
         float startTime = Time.time;
 
         while (Time.time < startTime + DashTime) { 

@@ -64,7 +64,7 @@ public class TextWriter : MonoBehaviour {
         _bsodImg.SetActive(true);
 
         yield return new WaitForSeconds(_timeUntilMenu);
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene("MainMenu");
         AudioManager.Instance.Play("BackgroundMusic");
         AudioManager.Instance.Stop("BSOD");
     }

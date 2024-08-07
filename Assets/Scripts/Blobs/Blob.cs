@@ -1,19 +1,16 @@
 using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class Blob : MonoBehaviour {
+/// <summary>
+/// Base Blob class that just handles their health.
+/// Die() method still needs to be implemented.
+/// </summary>
+public abstract class Blob : MonoBehaviour {
     [SerializeField] private int _maxHealth;
-    [SerializeField] private float _speed;
-    [SerializeField] private Audio[] _audioArray;
 
     private int _currentHealth;
 
-    void Awake() {
-        foreach (Audio audio in _audioArray) {
-            audio.Source = gameObject.AddComponent<AudioSource>();
-        }
-
+    private void Awake() {
         _currentHealth = _maxHealth;
     }
 
@@ -21,7 +18,7 @@ public class Blob : MonoBehaviour {
         if (dmg <= 0) {
             throw new ArgumentException("Can't deal " + dmg + " damage, needs to be at least 0");
         }
-        AudioSource.PlayClipAtPoint(_audioArray[1].Clip, transform.position, _audioArray[1].Volume);
+
         _currentHealth -= dmg;
         if (_currentHealth <= 0) {
             Die();
@@ -32,20 +29,21 @@ public class Blob : MonoBehaviour {
         if (num <= 0) {
             throw new ArgumentException("Can't heal " + num + ", needs to be at least 0");
         }
+
         _currentHealth += num;
-        if (_currentHealth > _maxHealth) {
-            _currentHealth = _maxHealth;
+        if (_currentHealth > MaxHealth) {
+            _currentHealth = MaxHealth;
         }
-        
     }
 
-    protected virtual void Die() {
-        if (Random.Range(0, 420) == 0) {
-            AudioSource.PlayClipAtPoint(_audioArray[0].Clip, transform.position, _audioArray[0].Volume);
-        }
-        BlobManager.RemoveBlob(this);
-        Destroy(gameObject);
+    /// <summary>
+    /// Sets Current Health to Max Health.
+    /// </summary>
+    protected void ResetCurrentHealth() {
+        _currentHealth = _maxHealth;
     }
+
+    protected abstract void Die();
 
     public int CurrentHealth {
         get { return _currentHealth; }
@@ -53,19 +51,18 @@ public class Blob : MonoBehaviour {
 
     public int MaxHealth {
         get { return _maxHealth; }
-    }
-
-    public float Speed {
-        get { return _speed; }
+        protected set { 
+            if (value < 1) {
+                throw new ArgumentException("Max Health must be at least 1.");
+            } else {
+                _maxHealth = value;
+            }
+        }
     }
 
     protected virtual void OnValidate() {
-        if (_currentHealth < 1) {
-            _currentHealth = 1;
-        }
-
-        if (_speed < 1) {
-            _speed = 1;
+        if (_maxHealth < 1) {
+            _maxHealth = 1;
         }
     }
 }

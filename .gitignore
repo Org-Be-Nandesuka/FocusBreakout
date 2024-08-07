@@ -11,6 +11,7 @@
 /[Mm]emoryCaptures/
 /[Uu]serSettings/
 /[Aa]ssets/Samples/
+/[Aa]ssets/Adobe_Assets/
 /[Aa]ssets/ProBuilder Data*
 /[Pp]rojectSettings/Packages/com.unity.probuilder
 
@@ -18,8 +19,7 @@
 !/[Aa]ssets/**/*.meta
 /[Aa]ssets/Samples.meta
 /[Aa]ssets/ProBuilder Data.meta
-/[Aa]ssets/Materials/Meshes/Ocean50x50W750H750*
-# Tied to lava floor asset, if changes don't apply remove this!!
+/[Aa]ssets/Adobe_Assets.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
