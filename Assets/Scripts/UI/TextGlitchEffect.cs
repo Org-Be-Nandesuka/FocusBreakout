@@ -81,14 +81,14 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
             _stringBuilder.Length = text.Length;
             _stringBuilder[idx] = GetRandomChar();
             _text.text = _stringBuilder.ToString();
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSecondsRealtime(time);
         }
     }
 
     // Return character to what it was originally
     IEnumerator EndRandCharCoroutine(int idx, float min, float max, string text) {
         float time = Random.Range(min, max);
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
         StopCoroutine(_initialRandCoroutineArray[idx]);
         _stringBuilder[idx] = text[idx];
     }
@@ -97,7 +97,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     // are returned back to normal (usually 1 or 2), this is used
     // as a temporary fix.
     IEnumerator FinalRandCharCoroutine(float time, string text) {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
         _text.text = text;
     }
 
@@ -110,11 +110,11 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
             _stringBuilder[idx] = GetRandomChar();
             _text.text = _stringBuilder.ToString();
-            yield return new WaitForSeconds(glitchTime);
+            yield return new WaitForSecondsRealtime(glitchTime);
 
             _stringBuilder[idx] = _targetText[idx]; // reset StringBuilder for next iteration
             _text.text = _targetText;
-            yield return new WaitForSeconds(restTime);        
+            yield return new WaitForSecondsRealtime(restTime);
         }
     }
 
@@ -143,7 +143,7 @@ public class TextGlitchEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
             float spacing = Random.Range(_hoverEffectStrength * -1, _hoverEffectStrength);
             _text.characterSpacing = spacing;
             currentTime += _hoverEffectSpeed;
-            yield return new WaitForSeconds(_hoverEffectSpeed);
+            yield return new WaitForSecondsRealtime(_hoverEffectSpeed);
         }
 
         _text.characterSpacing = _originalCharacterSpacing;
